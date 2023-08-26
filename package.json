@@ -22,5 +22,8 @@
     "tailwindcss": "3.3.3",
     "uuid": "^9.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.18.0 <20"
+  }
 }
