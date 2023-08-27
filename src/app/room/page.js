@@ -6,6 +6,8 @@ import io from "socket.io-client";
 import { Loading } from "@/components/loading";
 import { Deck } from "@/components/deck";
 import { UserCard } from "@/components/userCard";
+import GlobalHeader from "@/components/header";
+import Card from "@/components/card";
 
 let socket;
 
@@ -14,6 +16,7 @@ export default function Room() {
   const searchParams = useSearchParams();
   const room = searchParams.get("room");
   const userName = searchParams.get("username");
+  const roomName = searchParams.get("roomname");
   const [showSelectedNumber, setShowSelectedNumber] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -46,7 +49,7 @@ export default function Room() {
   };
 
   const copyUrlToClipboard = async () => {
-    const joinRoomLink = `${window.location.host}/username?room=${room}&username=`;
+    const joinRoomLink = `${window.location.host}/username?room=${room}&roomname=${roomName}&username=`;
     await navigator.clipboard.writeText(joinRoomLink);
     setShowToast(true);
     setTimeout(() => {
@@ -56,52 +59,62 @@ export default function Room() {
 
   return (
     <div>
-      <div className="absolute top-8 right-12">
-        <button
-          onClick={copyUrlToClipboard}
-          className="btn btn-outline btn-info normal-case rounded-full tracking-wider"
-        >
-          Invite Colleagues
-        </button>
-        {showToast ? (
-          <div className="toast toast-top toast-end mt-20">
-            <div className="alert alert-success bg-green-500 text-gray-900">
-              <span>Link Copied</span>
+      <GlobalHeader />
+      <div className="container mx-auto flex gap-2 flex-col mt-4">
+        <div className="relative self-end">
+          <button
+            onClick={copyUrlToClipboard}
+            className="btn btn-outline btn-info normal-case rounded-full tracking-wider"
+          >
+            Invite Colleagues
+          </button>
+          {showToast ? (
+            <div className="toast toast-top toast-end mt-20">
+              <div className="alert alert-success bg-green-500 text-gray-900">
+                <span>Link Copied</span>
+              </div>
             </div>
-          </div>
-        ) : null}
-      </div>
+          ) : null}
+        </div>
 
-      <div className="mt-16 ms-3">
-        <div className="flex">
-          <div className="flex-auto">
-            <div className="flex flex-col gap-10 gap-y-16 items-center">
-              <div className="h-40">
-                {users.map((user) => {
-                  return (
-                    <UserCard
-                      showSelectedNumber={showSelectedNumber}
-                      key={user.id}
-                      user={user}
-                    ></UserCard>
-                  );
-                })}
-              </div>
-              <div className="form-control w-32">
-                <label className="cursor-pointer label">
-                  <span className="label-text font-semibold">Reveal</span>
-                  <input
-                    type="checkbox"
-                    className="toggle toggle-success toggle-lg"
-                    defaultChecked={showSelectedNumber}
-                    onClick={() =>
-                      setShowSelectedNumber((prevState) => !prevState)
-                    }
-                  />
-                </label>
-              </div>
-              <div>
-                <Deck onVote={handleVote}></Deck>
+        <div className="mt-16 ms-3">
+          <div className="flex">
+            <div className="flex-auto">
+              <div className="flex flex-col gap-10 gap-y-16 items-center">
+                <div className="flex">
+                  {users.map((user) => {
+                    console.log(user);
+                    return (
+                      // <UserCard
+                      //   showSelectedNumber={showSelectedNumber}
+                      //   key={user.id}
+                      //   user={user}
+                      // ></UserCard>
+
+                      <Card
+                        reveal={showSelectedNumber}
+                        {...user}
+                        key={user.id}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="form-control w-32">
+                  <label className="cursor-pointer label">
+                    <span className="label-text font-semibold">Reveal</span>
+                    <input
+                      type="checkbox"
+                      className="toggle toggle-success toggle-lg"
+                      defaultChecked={showSelectedNumber}
+                      onClick={() =>
+                        setShowSelectedNumber((prevState) => !prevState)
+                      }
+                    />
+                  </label>
+                </div>
+                <div>
+                  <Deck onVote={handleVote}></Deck>
+                </div>
               </div>
             </div>
           </div>

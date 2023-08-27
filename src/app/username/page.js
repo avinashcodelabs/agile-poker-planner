@@ -2,34 +2,27 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import GlobalHeader from "@/components/header";
+import LandingPage from "../landingPage/page";
 
 export default function UserName() {
   const [userName, setUserName] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
   const room = searchParams.get("room");
+  const roomName = searchParams.get("roomname");
 
   const redirectToRoom = (e) => {
     if (userName.length >= 3 && e.key === "Enter") {
-      const roomLink = `/room?room=${room}&username=${userName}`;
+      const roomLink = `/room?room=${room}&username=${userName}&roomname=${roomName}`;
       router.push(roomLink);
     }
   };
 
   return (
-    <div className="flex h-screen w-1/5 m-auto mt-56">
-      <input
-        onChange={(e) => {
-          setUserName(e.target.value);
-        }}
-        value={userName}
-        onBlur={redirectToRoom}
-        onKeyDown={redirectToRoom}
-        type="text"
-        placeholder="You'r name here"
-        className="input input-bordered input-primary w-full rounded-full text-center"
-        autoFocus
-      />
+    <div>
+      <GlobalHeader />
+      <LandingPage />
     </div>
   );
 }
