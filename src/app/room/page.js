@@ -16,7 +16,6 @@ export default function Room() {
   const searchParams = useSearchParams();
   const room = searchParams.get("room");
   const userName = searchParams.get("username");
-  const roomName = searchParams.get("roomname");
   const [showSelectedNumber, setShowSelectedNumber] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -49,7 +48,7 @@ export default function Room() {
   };
 
   const copyUrlToClipboard = async () => {
-    const joinRoomLink = `${window.location.host}/username?room=${room}&roomname=${roomName}&username=`;
+    const joinRoomLink = `${window.location.host}/username?room=${room}&username=`;
     await navigator.clipboard.writeText(joinRoomLink);
     setShowToast(true);
     setTimeout(() => {

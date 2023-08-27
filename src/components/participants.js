@@ -10,7 +10,6 @@ export default function ParticipantsCard() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const room = searchParams.get("room");
-  const roomName = searchParams.get("roomname");
 
   const redirectToRoom = (e) => {
     if (userName.length < 3) {
@@ -18,7 +17,7 @@ export default function ParticipantsCard() {
       return;
     }
     if (userName.length >= 3) {
-      const roomLink = `/room?room=${room}&username=${userName}&roomname=${roomName}`;
+      const roomLink = `/room?room=${room}&username=${userName}`;
       router.push(roomLink);
     }
   };
@@ -28,7 +27,7 @@ export default function ParticipantsCard() {
         Join a room
       </h1>
       <h1 className="text-center text-bold">
-        {`You have been invited to join ${roomName} room`}
+        {`You have been invited to join a room`}
       </h1>
       <div className="form-control mt-4">
         <input
@@ -45,7 +44,10 @@ export default function ParticipantsCard() {
         />
       </div>
       <div className="form-control mt-6 w-fit self-end">
-        <button className="btn btn-primary" onClick={redirectToRoom}>
+        <button
+          className="btn btn-primary text-base-100"
+          onClick={redirectToRoom}
+        >
           Join Room
         </button>
       </div>

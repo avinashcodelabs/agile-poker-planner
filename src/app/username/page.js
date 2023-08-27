@@ -10,11 +10,10 @@ export default function UserName() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const room = searchParams.get("room");
-  const roomName = searchParams.get("roomname");
 
   const redirectToRoom = (e) => {
     if (userName.length >= 3 && e.key === "Enter") {
-      const roomLink = `/room?room=${room}&username=${userName}&roomname=${roomName}`;
+      const roomLink = `/room?room=${room}&username=${userName}`;
       router.push(roomLink);
     }
   };
