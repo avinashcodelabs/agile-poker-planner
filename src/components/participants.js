@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import classNames from "classnames";
 
@@ -17,10 +17,20 @@ export default function ParticipantsCard() {
       return;
     }
     if (userName.length >= 3) {
+      window.localStorage.setItem('userName', userName)
       const roomLink = `/room?room=${room}&username=${userName}`;
       router.push(roomLink);
     }
   };
+
+  useEffect(()=> {
+    const savedUserName = window.localStorage.getItem('userName')
+    console.log(savedUserName, window.localStorage)
+    if(savedUserName) {
+      router.push(`/room?room=${room}&username=${savedUserName}`)
+    }
+  })
+  
   return (
     <>
       <h1 className="text-center text-lg text-primary text-bold">
