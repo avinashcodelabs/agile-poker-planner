@@ -15,21 +15,10 @@ export default function AdminCard() {
       setError(true);
       return;
     }
-    window.localStorage.setItem('userName', userName)
     const uniqueId = uuid4();
     const roomLink = `/room?room=${uniqueId}&username=${userName}`;
     router.push(roomLink);
   };
-
-
-  useEffect(()=> {
-    const savedUserName = window.localStorage.getItem('userName')
-    console.log(savedUserName, window.localStorage)
-    if(savedUserName) {
-      const uniqueId = uuid4();
-      router.push(`/room?room=${uniqueId}&username=${savedUserName}`)
-    }
-  })
 
   return (
     <>
