@@ -1,21 +1,15 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { Loading } from "@/components/loading";
 import { Deck } from "@/components/deck";
-import { UserCard } from "@/components/userCard";
-import GlobalHeader from "@/components/header";
 import Card from "@/components/card";
 
 let socket;
 
-export default function Room() {
+export default function Room({room, userName}) {
   const [users, setUsers] = useState([]);
-  const searchParams = useSearchParams();
-  const room = searchParams.get("room");
-  const userName = searchParams.get("username");
   const [showSelectedNumber, setShowSelectedNumber] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -48,7 +42,7 @@ export default function Room() {
   };
 
   const copyUrlToClipboard = async () => {
-    const joinRoomLink = `${window.location.host}/username?room=${room}&username=`;
+    const joinRoomLink = `${window.location.host}/home?room=${room}`;
     await navigator.clipboard.writeText(joinRoomLink);
     setShowToast(true);
     setTimeout(() => {
@@ -58,7 +52,6 @@ export default function Room() {
 
   return (
     <div>
-      <GlobalHeader />
       <div className="container mx-auto flex gap-2 flex-col mt-4">
         <div className="relative self-end">
           <button

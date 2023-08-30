@@ -2,11 +2,8 @@
 
 import Image from "next/image";
 import Logo from "../public/images/logo.png";
-import { useSearchParams } from "next/navigation";
 
-export default function GlobalHeader() {
-  const searchParams = useSearchParams();
-  const userName = searchParams.get("username");
+export default function GlobalHeader({userName}) {
 
   const getInitials = (userName) => {
     return userName

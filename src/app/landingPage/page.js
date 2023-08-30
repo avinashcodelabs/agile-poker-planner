@@ -8,7 +8,7 @@ import Image from "next/image";
 import AdminCard from "@/components/admin";
 import ParticipantsCard from "@/components/participants";
 
-export default function LandingPage({ isAdmin }) {
+export default function LandingPage({ isAdmin, handleSetUserName }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -29,7 +29,7 @@ export default function LandingPage({ isAdmin }) {
 
             <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 border-primary border">
               <div className="card-body flex">
-                {isAdmin ? <AdminCard /> : <ParticipantsCard />}
+                 <ParticipantsCard isAdmin={isAdmin} handleSetUserName={handleSetUserName}/>
               </div>
             </div>
           </div>
