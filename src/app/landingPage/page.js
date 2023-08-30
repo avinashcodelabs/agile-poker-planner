@@ -1,16 +1,10 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { v4 as uuid4 } from "uuid";
 import BgImage from "../../public/images/bgimg.jpg";
 import Image from "next/image";
-import AdminCard from "@/components/admin";
 import ParticipantsCard from "@/components/participants";
 
 export default function LandingPage({ isAdmin, handleSetUserName }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   return (
     <main>

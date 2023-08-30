@@ -42,7 +42,7 @@ export default function Room({room, userName}) {
   };
 
   const copyUrlToClipboard = async () => {
-    const joinRoomLink = `${window.location.host}/home?room=${room}`;
+    const joinRoomLink = `${window.location.host}/?room=${room}`;
     await navigator.clipboard.writeText(joinRoomLink);
     setShowToast(true);
     setTimeout(() => {
