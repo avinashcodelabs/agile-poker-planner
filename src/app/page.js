@@ -2,46 +2,30 @@
 
 import GlobalHeader from "@/components/header";
 import { useSearchParams } from "next/navigation";
-import { useLayoutEffect, useState } from "react";
-import Room from "./room/page";
-import LandingPage from "./landingPage/page";
+import Room from "@/components/pages/room";
+import LandingPage from "@/components/pages/landingPage";
 import { v4 as uuid4 } from "uuid";
-import { Loading } from "@/components/loading";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function Home() {
   const searchParams = useSearchParams();
-  const [state, setState] = useState({
-    room: searchParams.get("room") || uuid4(),
-    isAdmin: !searchParams.get("room"),
-    userName: null,
-    loadingUserName: true,
-  });
-
-  useLayoutEffect(() => {
-    const savedUserName = window.localStorage.getItem("userName");
-    console.log(savedUserName, window.localStorage);
-    setState((state) => ({
-      ...state,
-      userName: state.userName || savedUserName,
-      loadingUserName: false,
-    }));
-  }, []);
+  // throws an error in server and sets the value to null which is an accepted behaviour for our requirement
+  const [userName, setUserName] = useLocalStorage("userName", null);
+  const room = searchParams.get("room") || uuid4();
+  const isAdmin = !searchParams.get("room");
 
   const handleSetUserName = (userName) => {
-    window.localStorage.setItem("userName", userName);
-    setState({ ...state, userName });
+    setUserName(userName);
   };
 
   return (
     <div>
-      <GlobalHeader userName={state.userName}/>
-      {state.loadingUserName ? (
-        <Loading />
-      ) : state?.userName ? (
-        <Room room={state.room} userName={state.userName} />
+      <GlobalHeader userName={userName} />
+      {userName ? (
+        <Room room={room} userName={userName} />
       ) : (
         <LandingPage
-          isAdmin={state.isAdmin}
+          isAdmin={isAdmin}
           handleSetUserName={handleSetUserName}
         />
       )}
