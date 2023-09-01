@@ -2,7 +2,6 @@
 
 import classNames from "classnames";
 import Image from "next/image";
-import { useState } from "react";
 import Verified from "../public/images/verified.gif";
 
 export default function Card({ reveal, userName, vote }) {
