@@ -1,20 +1,24 @@
 var usersCollection = {};
 var roomInfoCollection = {};
 
+const logCollectionValues = () => {
+  console.log(
+    "*".repeat(25),
+    "\nserver DB logs \nusersCollection",
+    usersCollection,
+    "\nroomInfoCollection",
+    roomInfoCollection,
+    "\n",
+    "#".repeat(25),
+    "\n"
+  );
+}
+
 // DB logger with set timing interval for development puroposes, runs after initial user has joined
 if (true) {
   setInterval(function () {
-    console.log(
-      "*".repeat(25),
-      "\nserver DB logs \nusersCollection",
-      usersCollection,
-      "\nroomInfoCollection",
-      roomInfoCollection,
-      "\n",
-      "#".repeat(25),
-      "\n"
-    );
-  }, 5000);
+    logCollectionValues()
+  }, 20 * 1000);
 }
 
 const addUser = ({ id, userName, room }) => {
@@ -35,13 +39,15 @@ const removeUser = (id) => {
   const user = { ...usersCollection[id] };
   if (user) {
     delete usersCollection[id];
-    roomInfoCollection[user.room].userCount--;
-    if (roomInfoCollection[user.room].userCount <= 0) {
-      console.log(
-        "Deleting roomInfo since all usersCollection left",
-        roomInfoCollection[user.room]
-      );
-      delete roomInfoCollection[user.room];
+    if (roomInfoCollection[user.room]) {
+      roomInfoCollection[user.room].userCount--;
+      if (roomInfoCollection[user.room].userCount <= 0) {
+        console.log(
+          "Deleting roomInfo since all usersCollection left",
+          roomInfoCollection[user.room]
+        );
+        delete roomInfoCollection[user.room];
+      }
     }
   }
   return user;
@@ -59,9 +65,9 @@ const createRoom = (user) => {
       roomAdmin: user.id,
       userCount: 1,
       userStory: {
-        title : null,
-        description : null,
-      }
+        title: null,
+        description: null,
+      },
     };
   } else {
     roomInfoCollection[user.room].userCount++;
@@ -72,8 +78,12 @@ const updateRoom = ({ room, revealState, userStory }) => {
   if (!roomInfoCollection[room]) {
     return null;
   }
-  roomInfoCollection[room].revealState = revealState;
-  roomInfoCollection[room].userStory = userStory;
+  if (revealState) {
+    roomInfoCollection[room].revealState = revealState;
+  }
+  if (userStory) {
+    roomInfoCollection[room].userStory = userStory;
+  }
   return roomInfoCollection[room];
 };
 
@@ -91,4 +101,5 @@ export {
   createRoom,
   getRoomInfo,
   updateRoom,
+  logCollectionValues
 };

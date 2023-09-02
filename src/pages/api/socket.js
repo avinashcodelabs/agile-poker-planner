@@ -52,12 +52,12 @@ export default function handler(req, res) {
       });
 
       socket.on("room-info-update", (data) => {
-        const roomInfo = updateRoom({room : data.room, revealState : data.revealState, userStory : data.userStory})
+        const roomInfo = updateRoom({room : data.room, revealState : data?.revealState, userStory : data?.userStory})
 
-        if (user) {
-          io.to(user.room).emit("room-users", {
-            room: user.room,
-            users: getUsersByRoom(user.room),
+        if (roomInfo) {
+          io.to(data.room).emit("room-users", {
+            room: data.room,
+            users: getUsersByRoom(data.room),
             roomInfo
           });
         }
