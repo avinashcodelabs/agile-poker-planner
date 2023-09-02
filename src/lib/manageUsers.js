@@ -12,14 +12,12 @@ const logCollectionValues = () => {
     "#".repeat(25),
     "\n"
   );
-}
+};
 
 // DB logger with set timing interval for development puroposes, runs after initial user has joined
-if (true) {
-  setInterval(function () {
-    logCollectionValues()
-  }, 20 * 1000);
-}
+// setInterval(function () {
+//   logCollectionValues();
+// }, 5000);
 
 const addUser = ({ id, userName, room }) => {
   const user = { id, userName, room };
@@ -101,5 +99,5 @@ export {
   createRoom,
   getRoomInfo,
   updateRoom,
-  logCollectionValues
+  logCollectionValues,
 };
