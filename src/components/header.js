@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Logo from "../public/images/logo.png";
 
-export default function GlobalHeader({userName}) {
+export default function GlobalHeader({userName, handleResetName}) {
 
   const getInitials = (userName) => {
     return userName
@@ -14,7 +14,7 @@ export default function GlobalHeader({userName}) {
   return (
     <header className="p-2 relative z-30">
       <div className="container mx-auto flex gap-2 justify-between">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center cursor-pointer" onClick={handleResetName}>
           <Image
             src={Logo}
             height={50}

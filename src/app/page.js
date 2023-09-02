@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div>
-      <GlobalHeader userName={userName} />
+      <GlobalHeader userName={userName} handleResetName={()=>setUserName(null)}/>
       {userName ? (
         <Room room={room} userName={userName} />
       ) : (
