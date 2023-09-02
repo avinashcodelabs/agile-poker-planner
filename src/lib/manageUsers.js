@@ -14,13 +14,8 @@ const logCollectionValues = () => {
   );
 };
 
-// DB logger with set timing interval for development puroposes, runs after initial user has joined
-// setInterval(function () {
-//   logCollectionValues();
-// }, 5000);
-
 const addUser = ({ id, userName, room }) => {
-  const user = { id, userName, room };
+  const user = { id, userName, room, vote: null };
   usersCollection[id] = user;
   return usersCollection[id];
 };
@@ -49,6 +44,12 @@ const removeUser = (id) => {
     }
   }
   return user;
+};
+
+const resetUserVotesByRoom = (room) => {
+  Object.entries(usersCollection).forEach(([userId, user]) => {
+    if (user.room === room) usersCollection[userId].vote = null;
+  });
 };
 
 const getUsersByRoom = (room) => {
@@ -96,6 +97,7 @@ export {
   removeUser,
   getUsersByRoom,
   updateUser,
+  resetUserVotesByRoom,
   createRoom,
   getRoomInfo,
   updateRoom,

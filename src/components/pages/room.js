@@ -16,8 +16,8 @@ export default function Room({ room, userName }) {
   useEffect(() => {
     initSocket();
     return () => {
-      socket.disconnect()
-    }
+      socket.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -48,8 +48,12 @@ export default function Room({ room, userName }) {
   const toggleRevealState = () => {
     socket.emit("room-info-update", {
       room,
-      revealState: roomInfo.revealState === 'open' ? 'close' : 'open',
+      revealState: roomInfo.revealState === "open" ? "close" : "open",
     });
+  };
+
+  const handleStartNewVote = () => {
+    socket.emit("start-new-vote", { room });
   };
 
   const copyUrlToClipboard = async () => {
@@ -88,22 +92,32 @@ export default function Room({ room, userName }) {
                   {users.map((user) => {
                     return (
                       <Card
-                        reveal={roomInfo.revealState === 'open'}
+                        reveal={roomInfo.revealState === "open"}
                         {...user}
                         key={user.id}
                       />
                     );
                   })}
                 </div>
-                <div className="form-control w-32">
+                <div className="form-control flex-row">
                   <label className="cursor-pointer label">
-                    <span className="label-text font-semibold">Reveal</span>
+                    <span className="label-text font-semibold px-2 text-lg">
+                      Reveal Votes
+                    </span>
                     <input
                       type="checkbox"
                       className="toggle toggle-success toggle-lg"
-                      checked={roomInfo.revealState === 'open'}
+                      checked={roomInfo.revealState === "open"}
                       onClick={toggleRevealState}
                     />
+                  </label>
+                  <label className="cursor-pointer label ml-8">
+                    <span
+                      onClick={handleStartNewVote}
+                      className="label-text font-extrabold py-2 px-3 text-lg bg-blue-400 rounded-lg"
+                    >
+                      Start New Voting
+                    </span>
                   </label>
                 </div>
                 <div>
