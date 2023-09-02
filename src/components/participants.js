@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import classNames from "classnames";
 
-export default function ParticipantsCard({ handleSetUserName, isAdmin }) {
-  const [userName, setUserName] = useState("");
+export default function ParticipantsCard({
+  handleSetUserName,
+  isAdmin,
+  placeholderUserName = "",
+}) {
+  const [userName, setUserName] = useState(placeholderUserName);
   const [isError, setError] = useState(false);
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const room = searchParams.get("room");
 
   const handleClick = (e) => {
     if (userName.length < 3) {

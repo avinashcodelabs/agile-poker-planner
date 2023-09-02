@@ -15,6 +15,9 @@ export default function Room({ room, userName }) {
 
   useEffect(() => {
     initSocket();
+    return () => {
+      socket.disconnect()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

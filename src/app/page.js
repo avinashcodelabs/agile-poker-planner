@@ -10,23 +10,37 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 export default function Home() {
   const searchParams = useSearchParams();
   // throws an error in server and sets the value to null which is an accepted behaviour for our requirement
-  const [userName, setUserName] = useLocalStorage("userName", null);
+  const [userState, setUserState] = useLocalStorage("userState", {
+    userName: "",
+    forcedLandingPage: true,
+  });
   const room = searchParams.get("room") || uuid4();
   const isAdmin = !searchParams.get("room");
 
   const handleSetUserName = (userName) => {
-    setUserName(userName);
+    setUserState({
+      userName,
+      forcedLandingPage: false,
+    });
+  };
+
+  const handleOpenLandingPage = () => {
+    setUserState((prevState) => ({ ...prevState, forcedLandingPage: true }));
   };
 
   return (
     <div>
-      <GlobalHeader userName={userName} handleResetName={()=>setUserName(null)}/>
-      {userName ? (
-        <Room room={room} userName={userName} />
+      <GlobalHeader
+        userName={userState.userName}
+        handleOpenLandingPage={handleOpenLandingPage}
+      />
+      {userState.userName && !userState.forcedLandingPage ? (
+        <Room room={room} userName={userState.userName} />
       ) : (
         <LandingPage
           isAdmin={isAdmin}
           handleSetUserName={handleSetUserName}
+          placeholderUserName={userState.userName}
         />
       )}
     </div>
