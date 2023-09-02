@@ -4,6 +4,9 @@ import {
   removeUser,
   updateUser,
   getUsersByRoom,
+  createRoom,
+  getRoomInfo,
+  updateRoom,
 } from "@/lib/manageUsers";
 
 export default function handler(req, res) {
@@ -26,10 +29,13 @@ export default function handler(req, res) {
           room: data.room,
         });
 
+        createRoom(user)
+
         socket.join(user.room);
         io.to(user.room).emit("room-users", {
           room: user.room,
           users: getUsersByRoom(user.room),
+          roomInfo: getRoomInfo(user.room),
         });
       });
 
@@ -40,6 +46,19 @@ export default function handler(req, res) {
           io.to(user.room).emit("room-users", {
             room: user.room,
             users: getUsersByRoom(user.room),
+            roomInfo: getRoomInfo(user.room),
+          });
+        }
+      });
+
+      socket.on("room-info-update", (data) => {
+        const roomInfo = updateRoom({room : data.room, revealState : data.revealState, userStory : data.userStory})
+
+        if (user) {
+          io.to(user.room).emit("room-users", {
+            room: user.room,
+            users: getUsersByRoom(user.room),
+            roomInfo
           });
         }
       });
@@ -50,6 +69,7 @@ export default function handler(req, res) {
           io.to(user.room).emit("room-users", {
             room: user.room,
             users: getUsersByRoom(user.room),
+            roomInfo: getRoomInfo(user.room),
           });
         }
       });
