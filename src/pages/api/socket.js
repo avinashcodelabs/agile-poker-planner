@@ -4,11 +4,20 @@ import {
   removeUser,
   updateUser,
   getUsersByRoom,
+  createRoom,
+  getRoomInfo,
+  updateRoom,
+  resetUserVotesByRoom,
+  logCollectionValues,
 } from "@/lib/manageUsers";
 
 export default function handler(req, res) {
   if (res.socket.server.io) {
     console.log("Socket is already running");
+    // DB logger with set timing interval for development puroposes
+    // setInterval(function () {
+    //   logCollectionValues();
+    // }, 5000);
   } else {
     console.log("Socket is initializing");
     const io = new Server(res.socket.server, {
@@ -26,10 +35,13 @@ export default function handler(req, res) {
           room: data.room,
         });
 
+        createRoom(user);
+
         socket.join(user.room);
         io.to(user.room).emit("room-users", {
           room: user.room,
           users: getUsersByRoom(user.room),
+          roomInfo: getRoomInfo(user.room),
         });
       });
 
@@ -40,6 +52,44 @@ export default function handler(req, res) {
           io.to(user.room).emit("room-users", {
             room: user.room,
             users: getUsersByRoom(user.room),
+            roomInfo: getRoomInfo(user.room),
+          });
+        }
+      });
+
+      socket.on("room-info-update", (data) => {
+        const roomInfo = updateRoom({
+          room: data.room,
+          revealState: data?.revealState,
+          userStory: data?.userStory,
+        });
+
+        if (roomInfo) {
+          io.to(data.room).emit("room-users", {
+            room: data.room,
+            users: getUsersByRoom(data.room),
+            roomInfo,
+          });
+        }
+      });
+
+      socket.on("start-new-vote", (data) => {
+        const roomInfo = updateRoom({
+          room: data.room,
+          revealState: "close",
+          userStory: {
+            title: null,
+            description: null,
+          },
+        });
+
+        resetUserVotesByRoom(data.room);
+
+        if (roomInfo) {
+          io.to(data.room).emit("room-users", {
+            room: data.room,
+            users: getUsersByRoom(data.room),
+            roomInfo,
           });
         }
       });
@@ -50,6 +100,7 @@ export default function handler(req, res) {
           io.to(user.room).emit("room-users", {
             room: user.room,
             users: getUsersByRoom(user.room),
+            roomInfo: getRoomInfo(user.room),
           });
         }
       });

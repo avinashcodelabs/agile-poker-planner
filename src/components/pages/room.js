@@ -8,13 +8,16 @@ import Card from "@/components/card";
 
 let socket;
 
-export default function Room({room, userName}) {
+export default function Room({ room, userName }) {
   const [users, setUsers] = useState([]);
-  const [showSelectedNumber, setShowSelectedNumber] = useState(false);
+  const [roomInfo, setRoomInfo] = useState({});
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     initSocket();
+    return () => {
+      socket.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,6 +33,7 @@ export default function Room({room, userName}) {
     socket.emit("user-joined", { room, userName });
     socket.on("room-users", (data) => {
       setUsers(data.users);
+      setRoomInfo(data.roomInfo);
     });
   };
 
@@ -39,6 +43,17 @@ export default function Room({room, userName}) {
 
   const handleVote = (vote) => {
     socket.emit("user-vote", { room, userName, vote });
+  };
+
+  const toggleRevealState = () => {
+    socket.emit("room-info-update", {
+      room,
+      revealState: roomInfo.revealState === "open" ? "close" : "open",
+    });
+  };
+
+  const handleStartNewVote = () => {
+    socket.emit("start-new-vote", { room });
   };
 
   const copyUrlToClipboard = async () => {
@@ -75,33 +90,34 @@ export default function Room({room, userName}) {
               <div className="flex flex-col gap-10 gap-y-16 items-center">
                 <div className="flex">
                   {users.map((user) => {
-                    console.log(user);
                     return (
-                      // <UserCard
-                      //   showSelectedNumber={showSelectedNumber}
-                      //   key={user.id}
-                      //   user={user}
-                      // ></UserCard>
-
                       <Card
-                        reveal={showSelectedNumber}
+                        reveal={roomInfo.revealState === "open"}
                         {...user}
                         key={user.id}
                       />
                     );
                   })}
                 </div>
-                <div className="form-control w-32">
+                <div className="form-control flex-row">
                   <label className="cursor-pointer label">
-                    <span className="label-text font-semibold">Reveal</span>
+                    <span className="label-text font-semibold px-2 text-lg">
+                      Reveal Votes
+                    </span>
                     <input
                       type="checkbox"
                       className="toggle toggle-success toggle-lg"
-                      defaultChecked={showSelectedNumber}
-                      onClick={() =>
-                        setShowSelectedNumber((prevState) => !prevState)
-                      }
+                      checked={roomInfo.revealState === "open"}
+                      onClick={toggleRevealState}
                     />
+                  </label>
+                  <label className="cursor-pointer label ml-8">
+                    <span
+                      onClick={handleStartNewVote}
+                      className="label-text font-extrabold py-2 px-3 text-lg bg-blue-400 rounded-lg"
+                    >
+                      Start New Voting
+                    </span>
                   </label>
                 </div>
                 <div>

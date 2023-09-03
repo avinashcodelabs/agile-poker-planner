@@ -4,8 +4,11 @@ import BgImage from "../../public/images/bgimg.jpg";
 import Image from "next/image";
 import ParticipantsCard from "@/components/participants";
 
-export default function LandingPage({ isAdmin, handleSetUserName }) {
-
+export default function LandingPage({
+  isAdmin,
+  handleSetUserName,
+  placeholderUserName,
+}) {
   return (
     <main>
       <div className="container mx-auto flex min-h-screen">
@@ -23,7 +26,11 @@ export default function LandingPage({ isAdmin, handleSetUserName }) {
 
             <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 border-primary border">
               <div className="card-body flex">
-                 <ParticipantsCard isAdmin={isAdmin} handleSetUserName={handleSetUserName}/>
+                <ParticipantsCard
+                  isAdmin={isAdmin}
+                  handleSetUserName={handleSetUserName}
+                  placeholderUserName={placeholderUserName}
+                />
               </div>
             </div>
           </div>
