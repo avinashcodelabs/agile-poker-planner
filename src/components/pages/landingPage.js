@@ -11,7 +11,7 @@ export default function LandingPage({
 }) {
   return (
     <main>
-      <div className="container mx-auto flex min-h-screen">
+      <div className="container mx-auto flex min-h-screen p-5 md:p-0 lg:p-0 items-center">
         <div className="flex-1 flex relative z-10">
           <div className="flex flex-col gap-2 max-w-sm lg:max-w-lg flex-1">
             <h1 className="font-bold text-5xl text-primary mt-16">
@@ -35,7 +35,7 @@ export default function LandingPage({
             </div>
           </div>
         </div>
-        <div className="flex-1 items-center flex-col">
+        <div className="flex-1 items-center md:flex-col hidden md:block lg:block">
           <Image src={BgImage} alt="Scrum planner" className="m-2 relative" />
         </div>
       </div>
