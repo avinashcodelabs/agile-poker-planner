@@ -24,7 +24,7 @@ export default function LandingPage({
               hello to accurate, fun-filled planning!`}
             </p>
 
-            <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 border-primary border">
+            <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 shadow-teal-300/50 border-primary border">
               <div className="card-body flex">
                 <ParticipantsCard
                   isAdmin={isAdmin}
@@ -36,7 +36,11 @@ export default function LandingPage({
           </div>
         </div>
         <div className="flex-1 items-center md:flex-col hidden md:block lg:block">
-          <Image src={BgImage} alt="Scrum planner" className="m-2 relative" />
+          <Image
+            src={BgImage}
+            alt="Scrum planner"
+            className="m-2 relative mix-blend-darken"
+          />
         </div>
       </div>
     </main>
