@@ -3,29 +3,30 @@
 import classNames from "classnames";
 import Image from "next/image";
 import Verified from "../public/images/verified.gif";
+import getRandomColor from "@/lib/getRandomColor";
 
-export default function Card({ reveal, userName, vote }) {
-  const getInitials = (userName) => {
-    return userName
-      ? userName
-          .match(/(\b\S)?/g)
-          .join("")
-          .toUpperCase()
-      : "";
-  };
-
+export default function Card({ reveal, userName, vote, index }) {
   return (
     <div className="card-container w-48">
-      <div className={classNames({ "card-inner": reveal && vote })}>
+      <div
+        style={{
+          transitionDelay: `${index + 1}00ms`,
+        }}
+        className={classNames({ "card-inner": reveal && vote })}
+      >
         {/* Front */}
-        <div className="card card-front bg-secondary shadow-xl p-6 relative">
+        <div className="card card-front bg-white shadow-xl shadow-teal-100/50 p-6 relative">
           <div className="items-center text-center flex flex-col gap-4">
             <div className="avatar placeholder flex flex-col justify-center items-center">
-              <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                <span>{getInitials(userName)}</span>
-              </div>
+              <div
+                className="rounded-full w-14 drop-shadow-md"
+                style={{
+                  backgroundColor: getRandomColor(),
+                  backgroundImage: `url('https://api.dicebear.com/6.x/open-peeps/svg?seed=${userName})`,
+                }}
+              ></div>
             </div>
-            <div className="text-neutral-focus font-semibold text-center">
+            <div className="text-neutral-focus font-semibold text-center text-ellipsis overflow-x-clip overflow-y-hidden h-6 w-32">
               {userName}
             </div>
             {vote ? (
@@ -38,14 +39,20 @@ export default function Card({ reveal, userName, vote }) {
           </div>
         </div>
         {/* Back */}
-        <div className="card card-back bg-accent shadow-xl p-6 absolute w-full h-full top-0 left-0">
+        <div className="card card-back bg-accent shadow-xl shadow-green-200/50 p-6 absolute w-full h-full top-0 left-0">
           <div className="items-center text-center flex flex-col gap-4">
             <div className="avatar placeholder flex flex-col justify-center items-center">
-              <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                <span>{getInitials(userName)}</span>
-              </div>
+              <div
+                className="rounded-full w-14 drop-shadow-md"
+                style={{
+                  backgroundColor: getRandomColor(),
+                  backgroundImage: `url('https://api.dicebear.com/6.x/open-peeps/svg?seed=${userName})`,
+                }}
+              ></div>
             </div>
-            <div className="text-base-100 text-center">{userName}</div>
+            <div className="text-base-100 text-center font-semibold text-ellipsis overflow-x-clip overflow-y-hidden h-6 w-32">
+              {userName}
+            </div>
             <h2 className="card-title text-center font-bold text-2xl text-base-100">
               {vote}
             </h2>

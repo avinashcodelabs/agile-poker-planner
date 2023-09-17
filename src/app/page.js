@@ -29,13 +29,19 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div
+      className="flex flex-col"
+      style={{
+        backgroundImage: `url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')`,
+      }}
+    >
       <GlobalHeader
         userName={userState.userName}
+        room={room}
         handleOpenLandingPage={handleOpenLandingPage}
       />
       {userState.userName && !userState.forcedLandingPage ? (
-        <Room room={room} userName={userState.userName} />
+        <Room room={room} userName={userState.userName} isAdmin={isAdmin} />
       ) : (
         <LandingPage
           isAdmin={isAdmin}

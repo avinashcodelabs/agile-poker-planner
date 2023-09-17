@@ -8,10 +8,9 @@ import Card from "@/components/card";
 
 let socket;
 
-export default function Room({ room, userName }) {
+export default function Room({ room, userName, isAdmin }) {
   const [users, setUsers] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
-  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     initSocket();
@@ -56,78 +55,79 @@ export default function Room({ room, userName }) {
     socket.emit("start-new-vote", { room });
   };
 
-  const copyUrlToClipboard = async () => {
-    const joinRoomLink = `${window.location.host}/?room=${room}`;
-    await navigator.clipboard.writeText(joinRoomLink);
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 1 * 1000);
-  };
-
   return (
-    <div>
-      <div className="container mx-auto flex gap-2 flex-col mt-4">
-        <div className="relative self-end">
-          <button
-            onClick={copyUrlToClipboard}
-            className="btn btn-outline btn-info normal-case rounded-full tracking-wider"
-          >
-            Invite Colleagues
-          </button>
-          {showToast ? (
-            <div className="toast toast-top toast-end mt-20">
-              <div className="alert alert-success bg-green-500 text-gray-900">
-                <span>Link Copied</span>
-              </div>
+    <main
+      className="container mx-auto flex gap-5 flex-col p-2 flex-1 w-full "
+      style={{
+        height: `calc(100vh) - 70px`,
+      }}
+    >
+      {isAdmin && (
+        <div className="flex flex-col md:flex-row gap-2 items-center self-start pt-2">
+          <input
+            className="input input-bordered rounded-xl input-primary w-96"
+            placeholder="Enter story title"
+          />
+          <div className="flex self-start gap-2">
+            <div className="cursor-pointer label">
+              <button
+                onClick={handleStartNewVote}
+                className="btn btn-primary text-base-100 normal-case rounded-lg font-medium"
+              >
+                Start New Voting
+              </button>
             </div>
-          ) : null}
-        </div>
-
-        <div className="mt-16 ms-3">
-          <div className="flex">
-            <div className="flex-auto">
-              <div className="flex flex-col gap-10 gap-y-16 items-center">
-                <div className="flex">
-                  {users.map((user) => {
-                    return (
-                      <Card
-                        reveal={roomInfo.revealState === "open"}
-                        {...user}
-                        key={user.id}
-                      />
-                    );
-                  })}
-                </div>
-                <div className="form-control flex-row">
-                  <label className="cursor-pointer label">
-                    <span className="label-text font-semibold px-2 text-lg">
-                      Reveal Votes
-                    </span>
-                    <input
-                      type="checkbox"
-                      className="toggle toggle-success toggle-lg"
-                      checked={roomInfo.revealState === "open"}
-                      onClick={toggleRevealState}
-                    />
-                  </label>
-                  <label className="cursor-pointer label ml-8">
-                    <span
-                      onClick={handleStartNewVote}
-                      className="label-text font-extrabold py-2 px-3 text-lg bg-blue-400 rounded-lg"
-                    >
-                      Start New Voting
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <Deck onVote={handleVote}></Deck>
-                </div>
-              </div>
+            <div className="cursor-pointer label">
+              <span className="label-text font-semibold px-2 text-lg">
+                Reveal Votes
+              </span>
+              <input
+                type="checkbox"
+                className="toggle toggle-success toggle-lg"
+                checked={roomInfo.revealState === "open"}
+                onClick={toggleRevealState}
+              />
             </div>
           </div>
         </div>
+      )}
+      <div className="flex gap-4 items-center self-start pt-2">
+        <label className="font-bold">Story:</label>
+        <span className="font-bold">This is a really awesome story</span>
       </div>
-    </div>
+      <div className="flex-1 pb-[400px]">
+        <label className="font-bold mb-2">Participants:</label>
+        <div className="flex flex-wrap items-center justify-center md:items-start md:justify-start">
+          {users.map((user, index) => {
+            return (
+              <Card
+                reveal={roomInfo.revealState === "open"}
+                index={index}
+                {...user}
+                key={user.id}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="voting-floater rounded-2xl p-3 bottom-1 bg-base-200 drop-shadow-md">
+        <div className="container mx-auto flex flex-col  gap-5 justify-center items-center">
+          {isAdmin && (
+            <div className="flex gap-2 items-center self-start">
+              <input
+                className="checkbox checkbox-success rounded-lg"
+                type="checkbox"
+                placeholder="Enter story title"
+              />
+              <label className="font-bold font-neutral">
+                Vote as participant
+              </label>
+            </div>
+          )}
+          <Deck onVote={handleVote}></Deck>
+        </div>
+      </div>
+    </main>
   );
 }
