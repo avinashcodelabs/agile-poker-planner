@@ -14,7 +14,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Learn More
+## Git Etiquettes
 
 Sample commit messages; choose according to the change you are making.
 
