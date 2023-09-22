@@ -16,7 +16,7 @@ const Deck = ({ onVote, users, userName }) => {
 };
 
 const VoteCard = ({ number, onVote }) => {
-  return (
+  const buttonJsx = (
     <button
       onClick={(e) => {
         onVote(number);
@@ -28,6 +28,19 @@ const VoteCard = ({ number, onVote }) => {
       {number}
     </button>
   );
+  if (Math.random() < 0.05) {
+    // TODO:  have a list of agile memes and select any randomly
+    return (
+      <div
+        className="tooltip"
+        data-tip={`Can you underestimate, your own skill of estimation 🤔🤔🤔 ?`}
+      >
+        {buttonJsx}
+      </div>
+    );
+  }
+
+  return <>{buttonJsx}</>;
 };
 
 export { Deck };

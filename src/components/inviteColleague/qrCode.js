@@ -2,7 +2,7 @@ import { QRCodeSVG } from "qrcode.react";
 
 const QrCode = ({ link }) => {
   return (
-    <div className="absolute right-5">
+    <div>
       <QRCodeSVG
         value={link}
         size={100}
