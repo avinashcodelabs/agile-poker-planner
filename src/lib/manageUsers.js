@@ -35,10 +35,6 @@ const removeUser = (id) => {
     if (roomInfoCollection[user.room]) {
       roomInfoCollection[user.room].userCount--;
       if (roomInfoCollection[user.room].userCount <= 0) {
-        console.log(
-          "Deleting roomInfo since all users left",
-          roomInfoCollection[user.room]
-        );
         delete roomInfoCollection[user.room];
       }
     }
