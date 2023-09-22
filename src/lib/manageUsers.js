@@ -10,7 +10,7 @@ const logCollectionValues = () => {
     roomInfoCollection,
     "\n",
     "#".repeat(25),
-    "\n"
+    "\n",
   );
 };
 
