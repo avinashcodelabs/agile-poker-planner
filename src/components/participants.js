@@ -11,14 +11,13 @@ export default function ParticipantsCard({
   const [userName, setUserName] = useState(placeholderUserName);
   const [isError, setError] = useState(false);
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (userName.length < 3) {
       setError(true);
       return;
     }
-    if (userName.length >= 3 && e.key === "Enter") {
-      handleSetUserName(userName);
-    }
+    handleSetUserName(userName);
   };
   return (
     <>
@@ -32,30 +31,33 @@ export default function ParticipantsCard({
           <h1 className="">{`You have been invited to join a room`}</h1>
         </>
       )}
-
-      <div className="form-control">
-        <input
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
-          value={userName}
-          type="text"
-          autoFocus
-          placeholder="Enter your name"
-          className={classNames("input input-bordered border border-primary", {
-            "border-red-600": isError && userName.length < 3,
-          })}
-          onKeyUp={handleClick}
-        />
-      </div>
-      <div className="form-control mt-6 w-fit self-end">
-        <button
-          className="btn btn-primary text-base-100 normal-case"
-          onClick={handleClick}
-        >
-          {isAdmin ? "Create Room" : "Join Room"}
-        </button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-control">
+          <input
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+            value={userName}
+            type="text"
+            autoFocus
+            placeholder="Enter your name"
+            className={classNames(
+              "input input-bordered border border-primary",
+              {
+                "border-red-600": isError && userName.length < 3,
+              },
+            )}
+          />
+        </div>
+        <div className="form-control mt-6 w-fit self-end">
+          <button
+            className="btn btn-primary text-base-100 normal-case"
+            type="submit"
+          >
+            {isAdmin ? "Create Room" : "Join Room"}
+          </button>
+        </div>
+      </form>
     </>
   );
 }
