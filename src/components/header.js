@@ -11,7 +11,7 @@ export default function GlobalHeader({ userName, handleOpenLandingPage }) {
       .toUpperCase();
   };
   return (
-    <header className="p-2 relative z-30 bg-base-100 me-4">
+    <header className="p-2 relative z-30 bg-base-100">
       <div className="container mx-auto flex gap-2 justify-between">
         <div
           className="flex gap-1 items-center cursor-pointer"
