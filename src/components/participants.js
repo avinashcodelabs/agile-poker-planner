@@ -16,7 +16,7 @@ export default function ParticipantsCard({
       setError(true);
       return;
     }
-    if (userName.length >= 3) {
+    if (userName.length >= 3 && e.key === "Enter") {
       handleSetUserName(userName);
     }
   };
@@ -45,6 +45,7 @@ export default function ParticipantsCard({
           className={classNames("input input-bordered border border-primary", {
             "border-red-600": isError && userName.length < 3,
           })}
+          onKeyUp={handleClick}
         />
       </div>
       <div className="form-control mt-6 w-fit self-end">
