@@ -21,17 +21,19 @@ export default function ParticipantsCard({
   };
   return (
     <>
-      {isAdmin ? (
-        <>
-          <h1 className="text-lg text-primary font-bold">Create a Room</h1>
-        </>
-      ) : (
-        <>
-          <h1 className="text-lg text-primary font-bold">Join a room</h1>
-          <h1 className="">{`You have been invited to join a room`}</h1>
-        </>
-      )}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          {isAdmin ? (
+            <>
+              <h1 className="text-lg text-primary font-bold">Create a Room</h1>
+            </>
+          ) : (
+            <>
+              <h1 className="text-lg text-primary font-bold">Join a room</h1>
+              <h1 className="">{`You have been invited to join a room`}</h1>
+            </>
+          )}
+        </div>
         <div className="form-control">
           <input
             onChange={(e) => {
@@ -49,7 +51,7 @@ export default function ParticipantsCard({
             )}
           />
         </div>
-        <div className="form-control mt-6 w-fit self-end">
+        <div className="form-control">
           <button
             className="btn btn-primary text-base-100 normal-case"
             type="submit"
