@@ -17,12 +17,23 @@ export default function LandingPage({
             <h1 className="font-bold text-5xl text-primary mt-12 mb-6">
               Play Your Cards Right with Planning Poker!
             </h1>
-            <p className="hidden md:block py-6 text-lg">
-              {`Elevate your team's project planning with our intuitive Planning
-              Poker app. Effortlessly collaborate, estimate tasks, and uncover
-              hidden aces in your project deck. Say goodbye to guesswork and
-              hello to accurate, fun-filled planning!`}
-            </p>
+            <div className="hidden md:block py-6 text-lg">
+              <p>Simplify Estimations Effortlessly!</p>
+              <p>
+                Our
+                <span className="underline decoration-wavy decoration-rose-500 mx-1">
+                  Free,
+                </span>
+                <span className="underline decoration-wavy decoration-yellow-500 me-1">
+                  No-Sign-In,
+                </span>
+                Open-Source App Ensures Ultimate
+                <span className="underline decoration-wavy decoration-green-500 mx-1">
+                  Data Privacy.
+                </span>
+                Intuitive and Hassle-Free
+              </p>
+            </div>
             <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 shadow-teal-300/50 border-primary border">
               <div className="card-body flex">
                 <ParticipantsCard
