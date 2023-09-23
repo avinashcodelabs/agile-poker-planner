@@ -8,16 +8,11 @@ import {
   getRoomInfo,
   updateRoom,
   resetUserVotesByRoom,
-  logCollectionValues,
 } from "@/lib/manageUsers";
 
 export default function handler(req, res) {
   if (res.socket.server.io) {
     console.log("Socket is already running");
-    // DB logger with set timing interval for development puroposes
-    // setInterval(function () {
-    //   logCollectionValues();
-    // }, 5000);
   } else {
     console.log("Socket is initializing");
     const io = new Server(res.socket.server, {
