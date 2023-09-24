@@ -1,7 +1,7 @@
-const generateFibonacciSeries = (upto = 13) => {
-  let n1 = 0;
-  let n2 = 1;
-  let n3 = 2;
+const generateFibonacciSeries = (upto = 21) => {
+  let n1 = 1;
+  let n2 = 2;
+  let n3 = 3;
   let nextTerm = n2 + n3;
   const series = [n1, n2, n3];
 
@@ -15,4 +15,12 @@ const generateFibonacciSeries = (upto = 13) => {
   return series;
 };
 
-export { generateFibonacciSeries };
+const getInviteRoomLink = (room) => {
+  return `${window.location.host}/?room=${room}`;
+};
+
+const writeToClipboard = async (content) => {
+  await navigator.clipboard.writeText(content);
+};
+
+export { generateFibonacciSeries, getInviteRoomLink, writeToClipboard };

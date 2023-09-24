@@ -5,6 +5,8 @@ import io from "socket.io-client";
 import { Loading } from "@/components/loading";
 import { Deck } from "@/components/deck";
 import Card from "@/components/card";
+import Agreement from "@/components/agreement";
+import { InviteColleague } from "../inviteColleague";
 
 let socket;
 
@@ -62,6 +64,7 @@ export default function Room({ room, userName, isAdmin }) {
         height: `calc(100vh) - 70px`,
       }}
     >
+      <InviteColleague room={room}></InviteColleague>
       {isAdmin && (
         <div className="flex flex-col md:flex-row gap-2 items-center self-start pt-2">
           <input
@@ -110,11 +113,10 @@ export default function Room({ room, userName, isAdmin }) {
           })}
         </div>
       </div>
-
       <div className="voting-floater rounded-2xl p-3 bottom-1 bg-base-200 drop-shadow-md">
-        <div className="container mx-auto flex flex-col  gap-5 justify-center items-center">
+        <div className="container mx-auto flex flex-col gap-5 justify-center items-center">
           {isAdmin && (
-            <div className="flex gap-2 items-center self-start">
+            <div className="flex gap-2 items-center self-start lg:absolute">
               <input
                 className="checkbox checkbox-success rounded-lg"
                 type="checkbox"
@@ -125,7 +127,12 @@ export default function Room({ room, userName, isAdmin }) {
               </label>
             </div>
           )}
-          <Deck onVote={handleVote}></Deck>
+
+          {roomInfo.revealState === "open" ? (
+            <Agreement users={users} />
+          ) : (
+            <Deck onVote={handleVote} users={users} userName={userName}></Deck>
+          )}
         </div>
       </div>
     </main>

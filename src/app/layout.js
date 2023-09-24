@@ -8,7 +8,8 @@ const roboto = Roboto({
 
 export const metadata = {
   title: "Poker Plan App",
-  description: "Collaboratively estimate and prioritize work stories with the Poker Planning App.",
+  description:
+    "Collaboratively estimate and prioritize work stories with the Poker Planning App.",
 };
 
 export default function RootLayout({ children }) {
