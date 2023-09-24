@@ -11,24 +11,25 @@ export default function LandingPage({
 }) {
   return (
     <main className="mx-8">
-      <div className="container mx-auto flex p-5 md:p-0 lg:p-0 items-center">
+      <div
+        className="container mx-auto flex p-5 md:p-0 lg:p-0 justify-center"
+        style={{ height: `calc(100vh - 82px)` }}
+      >
         <div className="flex-1 flex relative z-10">
           <div className="flex flex-col gap-2 max-w-sm lg:max-w-lg flex-1">
-            <h1 className="font-bold text-5xl text-primary mt-12 mb-6">
+            <h1 className="font-bold text-3xl md:text-5xl text-primary  md:mt-12 md:mb-6">
               Play Your Cards Right with Planning Poker!
             </h1>
-            <div className="hidden md:block py-6 text-lg">
+            <div className="md:block py-6 text-lg">
               <p>Simplify Estimations Effortlessly!</p>
               <p>
                 Our
-                <span className="underline decoration-wavy decoration-rose-500 mx-1">
-                  Free,
-                </span>
-                <span className="underline decoration-wavy decoration-yellow-500 me-1">
+                <span className="font-bold text-green-400 mx-1">Free,</span>
+                <span className="font-bold text-green-400 me-1">
                   No-Sign-In,
                 </span>
                 Open-Source App Ensures Ultimate
-                <span className="underline decoration-wavy decoration-green-500 mx-1">
+                <span className="font-bold text-green-400 mx-1">
                   Data Privacy.
                 </span>
                 Intuitive and Hassle-Free
