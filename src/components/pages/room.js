@@ -13,6 +13,7 @@ let socket;
 export default function Room({ room, userName, isAdmin }) {
   const [users, setUsers] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
+  const [newStoryTitle, setNewStoryTitle] = useState("");
 
   useEffect(() => {
     initSocket();
@@ -54,7 +55,20 @@ export default function Room({ room, userName, isAdmin }) {
   };
 
   const handleStartNewVote = () => {
-    socket.emit("start-new-vote", { room });
+    if (!newStoryTitle) alert("Please enter a story title");
+    else {
+      socket.emit("room-info-update", {
+        room,
+        revealState: "close",
+        userStory: {
+          title: newStoryTitle,
+          description: null,
+        },
+        startNewVote: true,
+      });
+      document.getElementById("story-title-input-field").value = "";
+      setNewStoryTitle("")
+    }
   };
 
   return (
@@ -68,8 +82,12 @@ export default function Room({ room, userName, isAdmin }) {
       {isAdmin && (
         <div className="flex flex-col md:flex-row gap-2 items-center self-start pt-2">
           <input
+            id="story-title-input-field"
             className="input input-bordered rounded-xl input-primary w-96"
             placeholder="Enter story title"
+            onChange={(event) => {
+              setNewStoryTitle(event.target.value);
+            }}
           />
           <div className="flex self-start gap-2">
             <div className="cursor-pointer label">
@@ -96,7 +114,7 @@ export default function Room({ room, userName, isAdmin }) {
       )}
       <div className="flex gap-4 items-center self-start pt-2">
         <label className="font-bold">Story:</label>
-        <span className="font-bold">This is a really awesome story</span>
+        <span className="font-bold">{roomInfo.userStory.title}</span>
       </div>
       <div className="flex-1 pb-[400px]">
         <label className="font-bold mb-2">Participants:</label>
