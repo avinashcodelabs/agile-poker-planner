@@ -55,20 +55,17 @@ export default function Room({ room, userName, isAdmin }) {
   };
 
   const handleStartNewVote = () => {
-    if (!newStoryTitle) alert("Please enter a story title");
-    else {
-      socket.emit("room-info-update", {
-        room,
-        revealState: "close",
-        userStory: {
-          title: newStoryTitle,
-          description: null,
-        },
-        startNewVote: true,
-      });
-      document.getElementById("story-title-input-field").value = "";
-      setNewStoryTitle("")
-    }
+    socket.emit("room-info-update", {
+      room,
+      revealState: "close",
+      userStory: {
+        title: newStoryTitle,
+        description: null,
+      },
+      startNewVote: true,
+    });
+    document.getElementById("story-title-input-field").value = "";
+    setNewStoryTitle("");
   };
 
   return (
