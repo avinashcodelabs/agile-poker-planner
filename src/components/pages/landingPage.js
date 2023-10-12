@@ -1,5 +1,3 @@
-"use client";
-
 import BgImage from "../../public/images/bgimg.jpg";
 import Image from "next/image";
 import ParticipantsCard from "@/components/participants";
