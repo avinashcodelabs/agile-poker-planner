@@ -52,6 +52,8 @@ export default function LandingPage({
             src={BgImage}
             alt="Scrum planner"
             className="m-2 relative mix-blend-darken"
+            placeholder="blur"
+            priority
           />
         </div>
       </div>
