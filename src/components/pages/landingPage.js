@@ -22,14 +22,10 @@ export default function LandingPage({
               <p>Simplify Estimations Effortlessly!</p>
               <p>
                 Our
-                <span className="font-bold text-green-400 mx-1">Free,</span>
-                <span className="font-bold text-green-400 me-1">
-                  No-Sign-In,
-                </span>
+                <span className="font-bold mx-1">Free,</span>
+                <span className="font-bold me-1">No-Sign-In,</span>
                 Open-Source App Ensures Ultimate
-                <span className="font-bold text-green-400 mx-1">
-                  Data Privacy.
-                </span>
+                <span className="font-bold mx-1">Data Privacy.</span>
                 Intuitive and Hassle-Free
               </p>
             </div>
