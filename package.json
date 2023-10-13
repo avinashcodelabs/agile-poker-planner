@@ -18,6 +18,7 @@
     "daisyui": "^3.6.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "million": "^2.6.4",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "qrcode.react": "^3.1.0",
