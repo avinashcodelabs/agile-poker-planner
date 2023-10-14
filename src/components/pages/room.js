@@ -48,6 +48,9 @@ export default function Room({ room, userName, isAdmin }) {
   };
 
   const toggleRevealState = () => {
+    const doWeHaveMinVote = users.some((user) => user.vote); // To check all the users voted, change some to every
+    if (!doWeHaveMinVote) return;
+
     socket.emit("room-info-update", {
       room,
       revealState: roomInfo.revealState === "open" ? "close" : "open",
@@ -105,7 +108,7 @@ export default function Room({ room, userName, isAdmin }) {
                   <input
                     type="checkbox"
                     className="toggle toggle-success toggle-lg"
-                    checked={roomInfo.revealState === "open"}
+                    defaultChecked={roomInfo.revealState === "open"}
                     onClick={toggleRevealState}
                   />
                 </div>
