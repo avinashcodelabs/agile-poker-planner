@@ -22,7 +22,7 @@ const VoteCard = ({ number, onVote }) => {
         onVote(number);
       }}
       className={classNames("btn btn-md md:btn-lg btn-primary text-base-100", {
-        "btn-primary btn-outline": vote !== number,
+        "btn-primary btn-outline bg-base-100": vote !== number,
       })}
     >
       {number}

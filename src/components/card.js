@@ -7,7 +7,7 @@ import getRandomColor from "@/lib/getRandomColor";
 
 export default function Card({ reveal, userName, vote, index }) {
   return (
-    <div className="card-container w-48">
+    <div className="card-container w-32 md:w-48">
       <div
         style={{
           transitionDelay: `${index + 1}00ms`,
@@ -15,7 +15,7 @@ export default function Card({ reveal, userName, vote, index }) {
         className={classNames({ "card-inner": reveal && vote })}
       >
         {/* Front */}
-        <div className="card card-front bg-white shadow-xl shadow-teal-100/50 p-6 relative">
+        <div className="card card-front shadow-xl shadow-teal-100/50 p-6 relative bg-white border border-teal-200">
           <div className="items-center text-center flex flex-col gap-4">
             <div className="avatar placeholder flex flex-col justify-center items-center">
               <div
