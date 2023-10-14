@@ -2,8 +2,8 @@
 
 ```bash
 
-git clone https://github.com/avinashcodelabs/poker-plan-app.git
-cd poker-plan-app
+git clone https://github.com/avinashcodelabs/agile-poker-planner.git
+cd agile-poker-planner
 npm install
 npm run dev
 

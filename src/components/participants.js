@@ -25,7 +25,7 @@ export default function ParticipantsCard({
         <div>
           {isAdmin ? (
             <>
-              <h1 className="text-lg text-primary font-bold">Create a Room</h1>
+              <h1 className="text-lg font-bold">Create a Room</h1>
             </>
           ) : (
             <>
@@ -53,7 +53,7 @@ export default function ParticipantsCard({
         </div>
         <div className="form-control">
           <button
-            className="btn btn-primary text-base-100 normal-case"
+            className="btn btn-primary text-gray-950 normal-case"
             type="submit"
           >
             {isAdmin ? "Create Room" : "Join Room"}

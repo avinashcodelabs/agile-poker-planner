@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Logo from "../public/images/logo.png";
 
@@ -24,7 +22,7 @@ export default function GlobalHeader({ userName, handleOpenLandingPage }) {
             alt="Scrum planner"
             className="m-2"
           />
-          <span className="font-black text-3xl">Scrum Planner</span>
+          <span className="font-black text-3xl">Agile Poker Planner</span>
         </div>
         {userName && (
           <div className="flex gap-2 items-center">

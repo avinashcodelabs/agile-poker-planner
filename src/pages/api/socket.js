@@ -59,26 +59,7 @@ export default function handler(req, res) {
           userStory: data?.userStory,
         });
 
-        if (roomInfo) {
-          io.to(data.room).emit("room-users", {
-            room: data.room,
-            users: getUsersByRoom(data.room),
-            roomInfo,
-          });
-        }
-      });
-
-      socket.on("start-new-vote", (data) => {
-        const roomInfo = updateRoom({
-          room: data.room,
-          revealState: "close",
-          userStory: {
-            title: null,
-            description: null,
-          },
-        });
-
-        resetUserVotesByRoom(data.room);
+        if (data?.startNewVote) resetUserVotesByRoom(data.room);
 
         if (roomInfo) {
           io.to(data.room).emit("room-users", {
