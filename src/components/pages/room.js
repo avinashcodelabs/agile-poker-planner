@@ -81,6 +81,7 @@ export default function Room({ room, userName, isAdmin }) {
             <div className="flex flex-col lg:flex-row gap-2 items-center self-start">
               <div className="self-start gap-2 w-full lg:w-96 flex items-center px-1 py-2">
                 <input
+                  id="story-title-input-field"
                   className="input input-bordered rounded-xl input-primary w-full"
                   placeholder="Enter story title"
                   onChange={(event) => {
