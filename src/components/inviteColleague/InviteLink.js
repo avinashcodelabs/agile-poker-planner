@@ -19,8 +19,8 @@ const InviteLink = ({ link }) => {
         Invite Colleagues
       </button>
       {showToast ? (
-        <div className="toast toast-top toast-end mt-20">
-          <div className="alert alert-success bg-green-500 text-gray-900">
+        <div className="toast toast-top">
+          <div className="alert alert-success">
             <span>Link Copied</span>
           </div>
         </div>

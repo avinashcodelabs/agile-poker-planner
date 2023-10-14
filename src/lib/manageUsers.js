@@ -60,7 +60,7 @@ const createRoom = (user) => {
       roomAdmin: user.id,
       userCount: 1,
       userStory: {
-        title: 'This is a really awesome story',
+        title: "This is a really awesome story",
         description: null,
       },
     };
