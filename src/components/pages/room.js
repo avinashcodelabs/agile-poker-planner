@@ -109,6 +109,7 @@ export default function Room({ room, userName, isAdmin }) {
                     type="checkbox"
                     className="toggle toggle-success toggle-lg"
                     defaultChecked={roomInfo.revealState === "open"}
+                    checked={roomInfo.revealState === "open"}
                     onClick={toggleRevealState}
                   />
                 </div>
