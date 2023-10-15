@@ -48,8 +48,8 @@ export default function Room({ room, userName, isAdmin }) {
   };
 
   const toggleRevealState = () => {
-    const doWeHaveMinVote = users.some((user) => user.vote); // To check all the users voted, change some to every
-    if (!doWeHaveMinVote) return;
+    const doWeHaveMinOneVote = users.some((user) => user.vote); // To check all the users voted, change some to every
+    if (!doWeHaveMinOneVote) return;
 
     socket.emit("room-info-update", {
       room,
@@ -86,7 +86,7 @@ export default function Room({ room, userName, isAdmin }) {
                 <input
                   id="story-title-input-field"
                   className="input input-bordered rounded-xl input-primary w-full"
-                  placeholder="Enter story title"
+                  placeholder="Please enter the user story title (optional)"
                   onChange={(event) => {
                     setNewStoryTitle(event.target.value);
                   }}
