@@ -5,9 +5,20 @@ import Image from "next/image";
 import Verified from "../public/images/verified.gif";
 import getRandomColor from "@/lib/getRandomColor";
 
-export default function Card({ onClick, reveal, userName, vote, index }) {
+export default function Card({
+  onClick,
+  onContextMenu,
+  reveal,
+  userName,
+  vote,
+  index,
+}) {
   return (
-    <div onClick={onClick} className="card-container w-32 md:w-48">
+    <div
+      onClick={onClick}
+      onContextMenu={onContextMenu}
+      className="card-container w-32 md:w-48"
+    >
       <div
         style={{
           transitionDelay: `${index + 1}00ms`,
