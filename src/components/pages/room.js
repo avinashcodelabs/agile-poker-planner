@@ -10,10 +10,11 @@ import { Drawer } from "../drawer";
 
 let socket;
 
-export default function Room({ room, userName, isAdmin }) {
+export default function Room({ room, userName }) {
   const [users, setUsers] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
   const [newStoryTitle, setNewStoryTitle] = useState("");
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   useEffect(() => {
     initSocket();
@@ -29,6 +30,7 @@ export default function Room({ room, userName, isAdmin }) {
       path: "/api/socket_io",
     });
     socket.on("connect", () => {
+      setCurrentUserId(socket.id);
       console.log("client - connected", socket.id);
     });
 
@@ -36,6 +38,7 @@ export default function Room({ room, userName, isAdmin }) {
     socket.on("room-users", (data) => {
       setUsers(data.users);
       setRoomInfo(data.roomInfo);
+      console.log(data);
     });
   };
 
@@ -71,6 +74,13 @@ export default function Room({ room, userName, isAdmin }) {
     setNewStoryTitle("");
   };
 
+  const handleAssignAdmin = (userId) => {
+    socket.emit("room-info-update", {
+      room,
+      newAdminId: userId,
+    });
+  };
+
   return (
     <main
       className="container mx-auto flex gap-5 flex-col p-2 flex-1 w-full "
@@ -80,7 +90,7 @@ export default function Room({ room, userName, isAdmin }) {
     >
       <div className="flex flex-row justify-between p-2">
         <div className="flex-1">
-          {isAdmin && (
+          {currentUserId === roomInfo.roomAdmin && (
             <div className="flex flex-col lg:flex-row gap-2 items-center self-start">
               <div className="self-start gap-2 w-full lg:w-96 flex items-center px-1 py-2">
                 <input
@@ -127,6 +137,7 @@ export default function Room({ room, userName, isAdmin }) {
               {users.map((user, index) => {
                 return (
                   <Card
+                    onClick={() => handleAssignAdmin(user.id)}
                     reveal={roomInfo.revealState === "open"}
                     index={index}
                     {...user}

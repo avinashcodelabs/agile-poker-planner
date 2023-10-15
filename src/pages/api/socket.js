@@ -8,11 +8,13 @@ import {
   getRoomInfo,
   updateRoom,
   resetUserVotesByRoom,
+  logCollectionValues,
 } from "@/lib/manageUsers";
 
 export default function handler(req, res) {
   if (res.socket.server.io) {
     console.log("Socket is already running");
+    logCollectionValues();
   } else {
     console.log("Socket is initializing");
     const io = new Server(res.socket.server, {
@@ -57,6 +59,7 @@ export default function handler(req, res) {
           room: data.room,
           revealState: data?.revealState,
           userStory: data?.userStory,
+          newAdminId: data?.newAdminId,
         });
 
         if (data?.startNewVote) resetUserVotesByRoom(data.room);

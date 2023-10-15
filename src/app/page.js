@@ -42,7 +42,7 @@ export default function Home() {
         setUserState={setUserState}
       />
       {userState.userName && !userState.forcedLandingPage ? (
-        <Room room={room} userName={userState.userName} isAdmin={isAdmin} />
+        <Room room={room} userName={userState.userName} />
       ) : (
         <LandingPage
           isAdmin={isAdmin}
