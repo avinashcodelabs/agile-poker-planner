@@ -13,7 +13,7 @@ export default function ParticipantsCard({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userName.length < 3) {
+    if (userName.length < 2) {
       setError(true);
       return;
     }
