@@ -120,8 +120,7 @@ export default function Room({ room, userName, isAdmin }) {
             <span className="font-bold">{roomInfo.userStory.title}</span>
           </div>
           <div className="flex-1 pb-[400px]">
-            <label className="font-bold mb-2">Participants:</label>
-            <div className="flex flex-wrap items-center justify-center md:items-start md:justify-start">
+            <div className="flex flex-wrap mt-2 items-center justify-center md:items-start md:justify-start">
               {users.map((user, index) => {
                 return (
                   <Card

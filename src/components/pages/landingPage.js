@@ -44,7 +44,7 @@ export default function LandingPage({
           <Image
             height={600}
             src={BgImage}
-            alt="Scrum planner"
+            alt="Agile Poker Planner"
             className="m-2 relative mix-blend-darken"
             placeholder="blur"
             priority

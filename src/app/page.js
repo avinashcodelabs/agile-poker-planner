@@ -9,7 +9,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function Home() {
   const searchParams = useSearchParams();
-  // throws an error in server and sets the value to null which is an accepted behaviour for our requirement
+  // throws an error in server and sets the value to null which is an accepted behavior for our requirement
   const [userState, setUserState] = useLocalStorage("userState", {
     userName: "",
     forcedLandingPage: true,
@@ -24,7 +24,7 @@ export default function Home() {
     });
   };
 
-  const handleOpenLandingPage = () => {
+  const handleUsernameChange = () => {
     setUserState((prevState) => ({ ...prevState, forcedLandingPage: true }));
   };
 
@@ -38,7 +38,8 @@ export default function Home() {
       <GlobalHeader
         userName={userState.userName}
         room={room}
-        handleOpenLandingPage={handleOpenLandingPage}
+        handleUsernameChange={handleUsernameChange}
+        setUserState={setUserState}
       />
       {userState.userName && !userState.forcedLandingPage ? (
         <Room room={room} userName={userState.userName} isAdmin={isAdmin} />
