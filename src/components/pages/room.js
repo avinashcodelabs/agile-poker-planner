@@ -108,7 +108,6 @@ export default function Room({ room, userName, isAdmin }) {
                   <input
                     type="checkbox"
                     className="toggle toggle-success toggle-lg"
-                    defaultChecked={roomInfo.revealState === "open"}
                     checked={roomInfo.revealState === "open"}
                     onClick={toggleRevealState}
                   />
@@ -116,10 +115,13 @@ export default function Room({ room, userName, isAdmin }) {
               </div>
             </div>
           )}
-          <div className="flex gap-4 items-center self-start pt-2">
-            <label className="font-bold">Story:</label>
-            <span className="font-bold">{roomInfo.userStory.title}</span>
-          </div>
+          {roomInfo.userStory.title ? (
+            <div className="flex gap-2 items-center self-start pt-2 p-2">
+              <label className="font-medium">{`You'll estimate for :`}</label>
+              <p className="font-bold">{roomInfo.userStory.title}</p>
+            </div>
+          ) : null}
+
           <div className="flex-1 pb-[400px]">
             <div className="flex flex-wrap mt-2 items-center justify-center md:items-start md:justify-start">
               {users.map((user, index) => {
