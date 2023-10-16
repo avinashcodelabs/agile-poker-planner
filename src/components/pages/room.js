@@ -157,6 +157,7 @@ export default function Room({ room, userName }) {
                       handleUserTileClick(user.id, event);
                     }}
                     reveal={roomInfo.revealState === "open"}
+                    isAdmin={roomInfo.roomAdmin === user.id}
                     index={index}
                     {...user}
                     key={user.id}

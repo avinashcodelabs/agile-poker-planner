@@ -7,7 +7,8 @@ import getRandomColor from "@/lib/getRandomColor";
 import { AdminIcon } from "./adminIcon";
 
 export default function Card(props) {
-  const { onClick, onContextMenu, reveal, userName, vote, index } = props;
+  const { onClick, onContextMenu, reveal, userName, vote, index, isAdmin } =
+    props;
   return (
     <div
       onClick={onClick}
@@ -22,7 +23,7 @@ export default function Card(props) {
       >
         {/* Front */}
         <div className="card card-front shadow-xl shadow-teal-100/50 p-6 relative bg-white border border-teal-200">
-          <AdminIcon />
+          {isAdmin ? <AdminIcon /> : null}
           <div className="items-center text-center flex flex-col gap-4">
             <div className="avatar placeholder flex flex-col justify-center items-center">
               <div
