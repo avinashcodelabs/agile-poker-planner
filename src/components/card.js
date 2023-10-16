@@ -4,15 +4,10 @@ import classNames from "classnames";
 import Image from "next/image";
 import Verified from "../public/images/verified.gif";
 import getRandomColor from "@/lib/getRandomColor";
+import { AdminIcon } from "./adminIcon";
 
-export default function Card({
-  onClick,
-  onContextMenu,
-  reveal,
-  userName,
-  vote,
-  index,
-}) {
+export default function Card(props) {
+  const { onClick, onContextMenu, reveal, userName, vote, index } = props;
   return (
     <div
       onClick={onClick}
@@ -27,6 +22,7 @@ export default function Card({
       >
         {/* Front */}
         <div className="card card-front shadow-xl shadow-teal-100/50 p-6 relative bg-white border border-teal-200">
+          <AdminIcon />
           <div className="items-center text-center flex flex-col gap-4">
             <div className="avatar placeholder flex flex-col justify-center items-center">
               <div
