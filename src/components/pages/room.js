@@ -7,13 +7,21 @@ import { Deck } from "@/components/deck";
 import Card from "@/components/card";
 import Agreement from "@/components/agreement";
 import { Drawer } from "../drawer";
+import "react-contexify/dist/ReactContexify.css";
+import { useContextMenu } from "react-contexify";
+import { CustomMenu } from "../customMenu";
 
 let socket;
 
-export default function Room({ room, userName, isAdmin }) {
+export default function Room({ room, userName }) {
   const [users, setUsers] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
   const [newStoryTitle, setNewStoryTitle] = useState("");
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const userTileMenuId = "userTileMenuId";
+  const { show } = useContextMenu({
+    id: userTileMenuId,
+  });
 
   useEffect(() => {
     initSocket();
@@ -29,6 +37,7 @@ export default function Room({ room, userName, isAdmin }) {
       path: "/api/socket_io",
     });
     socket.on("connect", () => {
+      setCurrentUserId(socket.id);
       console.log("client - connected", socket.id);
     });
 
@@ -36,6 +45,7 @@ export default function Room({ room, userName, isAdmin }) {
     socket.on("room-users", (data) => {
       setUsers(data.users);
       setRoomInfo(data.roomInfo);
+      console.log(data);
     });
   };
 
@@ -71,6 +81,19 @@ export default function Room({ room, userName, isAdmin }) {
     setNewStoryTitle("");
   };
 
+  const handleAssignAdmin = (userId) => {
+    socket.emit("room-info-update", {
+      room,
+      newAdminId: userId,
+    });
+  };
+
+  const handleUserTileClick = (userId, event) => {
+    if (roomInfo.roomAdmin !== userId && roomInfo.roomAdmin === currentUserId) {
+      show({ event, props: { userId } });
+    }
+  };
+
   return (
     <main
       className="container mx-auto flex gap-5 flex-col p-2 flex-1 w-full "
@@ -80,7 +103,7 @@ export default function Room({ room, userName, isAdmin }) {
     >
       <div className="flex flex-row justify-between p-2">
         <div className="flex-1">
-          {isAdmin && (
+          {currentUserId === roomInfo.roomAdmin && (
             <div className="flex flex-col lg:flex-row gap-2 items-center self-start">
               <div className="self-start gap-2 w-full lg:w-96 flex items-center px-1 py-2">
                 <input
@@ -127,6 +150,12 @@ export default function Room({ room, userName, isAdmin }) {
               {users.map((user, index) => {
                 return (
                   <Card
+                    onClick={(event) => {
+                      handleUserTileClick(user.id, event);
+                    }}
+                    onContextMenu={(event) => {
+                      handleUserTileClick(user.id, event);
+                    }}
                     reveal={roomInfo.revealState === "open"}
                     index={index}
                     {...user}
@@ -161,6 +190,12 @@ export default function Room({ room, userName, isAdmin }) {
           )}
         </div>
       </div>
+      <CustomMenu
+        menuId={userTileMenuId}
+        handleOnClick={(event) => {
+          handleAssignAdmin(event.props.userId);
+        }}
+      />
     </main>
   );
 }
