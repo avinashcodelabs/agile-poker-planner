@@ -1,17 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Logo from "../public/images/logo.png";
-import { FaUserEdit } from "react-icons/fa";
+import { NavMenu } from "./navMenu";
 
 export default function GlobalHeader({
   userName,
   handleUsernameChange,
   setUserState,
+  room,
 }) {
   const { push } = useRouter();
-
   // const getInitials = (userName) => {
   //   return userName
   //     .match(/(\b\S)?/g)
@@ -39,7 +40,9 @@ export default function GlobalHeader({
           />
           <span className="font-black text-3xl">Agile Poker Planner</span>
         </div>
-        {userName && (
+        <NavMenu room={room} />
+
+        {/* {userName && (
           <div
             className="flex gap-2 items-center tooltip tooltip-left"
             data-tip="Click to modify your username"
@@ -55,7 +58,7 @@ export default function GlobalHeader({
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </header>
   );

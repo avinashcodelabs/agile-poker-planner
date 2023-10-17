@@ -4,7 +4,6 @@ import classNames from "classnames";
 import Image from "next/image";
 import Verified from "../public/images/verified.gif";
 import getRandomColor from "@/lib/getRandomColor";
-import { AdminIcon } from "./adminIcon";
 
 export default function Card(props) {
   const { onClick, onContextMenu, reveal, userName, vote, index, isAdmin } =
@@ -23,7 +22,6 @@ export default function Card(props) {
       >
         {/* Front */}
         <div className="card card-front shadow-xl shadow-teal-100/50 p-6 relative bg-white border border-teal-200">
-          {isAdmin ? <AdminIcon /> : null}
           <div className="items-center text-center flex flex-col gap-4">
             <div className="avatar placeholder flex flex-col justify-center items-center">
               <div
@@ -35,7 +33,7 @@ export default function Card(props) {
               ></div>
             </div>
             <div className="text-neutral-focus font-semibold text-center text-ellipsis overflow-x-clip overflow-y-hidden h-6 w-32">
-              {userName}
+              {userName} {isAdmin ? <span>(host)</span> : null}
             </div>
             {vote ? (
               <div className="w-6 h-6">
