@@ -6,7 +6,6 @@ import { Loading } from "@/components/loading";
 import { Deck } from "@/components/deck";
 import Card from "@/components/card";
 import Agreement from "@/components/agreement";
-import { Drawer } from "../drawer";
 import "react-contexify/dist/ReactContexify.css";
 import { useContextMenu } from "react-contexify";
 import { CustomMenu } from "../customMenu";
@@ -167,7 +166,6 @@ export default function Room({ room, userName }) {
             </div>
           </div>
         </div>
-        <Drawer className="self-end" room={room} />
       </div>
       <div className="voting-floater rounded-2xl p-3 bottom-1 drop-shadow-md bg-primary bg-opacity-10">
         <div className="container mx-auto flex flex-col gap-5 justify-center items-center">
