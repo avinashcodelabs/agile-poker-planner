@@ -150,7 +150,7 @@ export default function Home() {
                       type="checkbox"
                       className="toggle toggle-success toggle-lg"
                       checked={roomInfo.revealState === "open"}
-                      onClick={toggleRevealState}
+                      onChange={toggleRevealState}
                     />
                   </div>
                 </div>
