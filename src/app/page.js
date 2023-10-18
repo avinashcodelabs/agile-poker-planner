@@ -1,6 +1,6 @@
-import BgImage from "../public/images/bgimg.jpg";
-import Image from "next/image";
 import ParticipantsCard from "@/components/participants";
+import Image from "next/image";
+import BgImage from "../public/images/bgimg.jpg";
 
 export default function Home() {
   return (

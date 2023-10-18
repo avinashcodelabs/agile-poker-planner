@@ -16,7 +16,7 @@ export default function ParticipantsCard() {
   const { push } = useRouter();
 
   const handleSubmit = (e) => {
-    const newUserName = document.getElementById("user-name").value;
+    const newUserName = document.getElementById("user-name").value || userName;
     e.preventDefault();
     if (newUserName.length < 2) {
       setError(true);

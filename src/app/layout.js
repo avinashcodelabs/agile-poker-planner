@@ -1,7 +1,7 @@
-import Script from "next/script";
+import GlobalHeader from "@/components/header";
 import "@/styles/globals.css";
 import { Roboto } from "next/font/google";
-import GlobalHeader from "@/components/header";
+import Script from "next/script";
 
 const roboto = Roboto({
   weight: "400",
