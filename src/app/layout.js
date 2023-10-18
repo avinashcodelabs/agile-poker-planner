@@ -1,6 +1,7 @@
 import Script from "next/script";
 import "@/styles/globals.css";
 import { Roboto } from "next/font/google";
+import GlobalHeader from "@/components/header";
 
 const roboto = Roboto({
   weight: "400",
@@ -26,7 +27,10 @@ export default function RootLayout({ children }) {
           gtag('config', 'G-7Z1TDZ6CSW');
         `}
       </Script>
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <GlobalHeader />
+        {children}
+      </body>
     </html>
   );
 }
