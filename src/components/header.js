@@ -7,7 +7,7 @@ import Logo from "../public/images/logo.png";
 import { NavMenu } from "./navMenu";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
-export default function GlobalHeader({ room }) {
+export default function GlobalHeader() {
   const searchParams = useSearchParams();
   const roomId = searchParams.get("roomid");
   const [userName, setUserName] = useLocalStorage("userName", "");
@@ -39,7 +39,7 @@ export default function GlobalHeader({ room }) {
           />
           <span className="font-black text-3xl">Agile Poker Planner</span>
         </div>
-        <NavMenu room={room} />
+        <NavMenu room={roomId} />
 
         {/* {userName && (
           <div
