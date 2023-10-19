@@ -7,7 +7,7 @@ const Deck = ({ onVote, users, userName }) => {
 
   const fibonacciNumbers = generateFibonacciSeries();
   return (
-    <div className="join flex gap-4 p-2 flex-1 justify-center items-center">
+    <div className="join flex gap-4 p-2 flex-1 justify-center items-center flex-wrap">
       {fibonacciNumbers.map((number, index) => (
         <VoteCard onVote={onVote} number={number} key={index}></VoteCard>
       ))}
@@ -22,7 +22,7 @@ const VoteCard = ({ number, onVote }) => {
         onVote(number);
       }}
       className={classNames("btn btn-md md:btn-lg btn-primary text-base-100", {
-        "btn-primary btn-outline": vote !== number,
+        "btn-primary btn-outline bg-base-100": vote !== number,
       })}
     >
       {number}

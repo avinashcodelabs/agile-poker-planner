@@ -29,17 +29,22 @@ const updateUser = ({ id, vote }) => {
 };
 
 const removeUser = (id) => {
-  const user = { ...usersCollection[id] };
-  if (user) {
+  const removedUser = { ...usersCollection[id] };
+  if (removedUser) {
     delete usersCollection[id];
-    if (roomInfoCollection[user.room]) {
-      roomInfoCollection[user.room].userCount--;
-      if (roomInfoCollection[user.room].userCount <= 0) {
-        delete roomInfoCollection[user.room];
+    if (roomInfoCollection[removedUser.room]) {
+      roomInfoCollection[removedUser.room].userCount--;
+      if (roomInfoCollection[removedUser.room].userCount <= 0) {
+        delete roomInfoCollection[removedUser.room];
+      } else if (roomInfoCollection[removedUser.room].roomAdmin == id) {
+        const newAdmin = Object.values(usersCollection).find(
+          (user) => user.room === removedUser.room,
+        );
+        roomInfoCollection[removedUser.room].roomAdmin = newAdmin.id;
       }
     }
   }
-  return user;
+  return removedUser;
 };
 
 const resetUserVotesByRoom = (room) => {
@@ -56,11 +61,11 @@ const createRoom = (user) => {
   if (!roomInfoCollection[user.room]) {
     roomInfoCollection[user.room] = {
       room: user.room,
-      revealState: false,
+      revealState: "close",
       roomAdmin: user.id,
       userCount: 1,
       userStory: {
-        title: null,
+        title: "",
         description: null,
       },
     };
@@ -69,7 +74,7 @@ const createRoom = (user) => {
   }
 };
 
-const updateRoom = ({ room, revealState, userStory }) => {
+const updateRoom = ({ room, revealState, userStory, newAdminId }) => {
   if (!roomInfoCollection[room]) {
     return null;
   }
@@ -78,6 +83,9 @@ const updateRoom = ({ room, revealState, userStory }) => {
   }
   if (userStory) {
     roomInfoCollection[room].userStory = userStory;
+  }
+  if (newAdminId) {
+    roomInfoCollection[room].roomAdmin = newAdminId;
   }
   return roomInfoCollection[room];
 };
