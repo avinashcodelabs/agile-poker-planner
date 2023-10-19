@@ -77,13 +77,13 @@ const NavMenu = ({ room }) => {
             <li>
               <a>
                 <CiDark size="1.25em" className="cursor-pointer me-1" />
-                Dark mode <sub class="font-features subs">coming soon</sub>
+                Dark mode <sub className="font-features subs">coming soon</sub>
               </a>
             </li>
             <li>
               <a className="border-b rounded-none pb-4">
                 <GoHistory size="1.25em" className="cursor-pointer me-1" />
-                History <sub class="font-features subs">coming soon</sub>
+                History <sub className="font-features subs">coming soon</sub>
               </a>
             </li>
             <li>
