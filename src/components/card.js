@@ -33,7 +33,10 @@ export default function Card(props) {
               ></div>
             </div>
             <div className="text-neutral-focus font-semibold text-center text-ellipsis overflow-x-clip overflow-y-hidden h-6 w-32">
-              {userName} {isAdmin ? <span>(host)</span> : null}
+              {userName}
+              {isAdmin ? (
+                <span className="text-gray-500 ms-1">(host)</span>
+              ) : null}
             </div>
             {vote ? (
               <div className="w-6 h-6">

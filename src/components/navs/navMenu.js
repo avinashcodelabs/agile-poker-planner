@@ -1,10 +1,13 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { FaUserEdit } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
-import { LiaExternalLinkAltSolid } from "react-icons/lia";
+import {
+  LiaExternalLinkAltSolid,
+  LiaUserEditSolid,
+  LiaUsersCogSolid,
+} from "react-icons/lia";
 import { CiDark } from "react-icons/ci";
 import { GoHistory } from "react-icons/go";
 import { TbHandClick } from "react-icons/tb";
@@ -14,7 +17,7 @@ import { QrCode } from "@/components/qrCode";
 import { InviteLink } from "@/components/inviteLink.js";
 
 const NavMenu = (props) => {
-  const { currentUserInfo, handleUserRename } = props;
+  const { userName, handleUserRename } = props;
   const [isNameRenameAble, setIsNameRenameAble] = React.useState(false);
   const newUseNameRef = React.useState(null);
   const searchParams = useSearchParams();
@@ -34,7 +37,7 @@ const NavMenu = (props) => {
   return (
     <div className="flex gap-8 me-3 mt-3">
       <InviteLink room={roomid} />
-      <div className="dropdown dropdown-end">
+      <div className="dropdown dropdown-end  dropdown-open">
         <div tabIndex={0} className="p-3 rounded-lg hover:bg-zinc-100">
           <Image
             src={MenuIcon}
@@ -59,7 +62,7 @@ const NavMenu = (props) => {
                     type="text"
                     className="input input-bordered input-sm join-item w-full max-w-xs"
                     placeholder="new name"
-                    defaultValue={currentUserInfo.userName}
+                    defaultValue={userName}
                   />
                   <button
                     type="submit"
@@ -69,11 +72,29 @@ const NavMenu = (props) => {
                   </button>
                 </form>
               ) : (
-                <a className="border-b rounded-none pb-4">
-                  <FaUserEdit size="1.25em" className="cursor-pointer me-1" />
-                  <span>Rename - {currentUserInfo.userName}</span>
+                <a className="">
+                  <LiaUserEditSolid
+                    size="1.4em"
+                    className="cursor-pointer me-1"
+                  />
+                  <div>
+                    Change name :
+                    <span className="font-bold ms-1">{userName}</span>
+                  </div>
                 </a>
               )}
+            </li>
+            <li className="hover:bg-inherit focus:bg-inherit">
+              <a
+                className="border-b pb-4 tooltip tooltip-left flex"
+                data-tip="Click on any user's card/tile and pick 'Set as host'"
+              >
+                <LiaUsersCogSolid
+                  size="1.4em"
+                  className="cursor-pointer me-1"
+                />
+                <span>Set others as host</span>
+              </a>
             </li>
             <li>
               <a>
@@ -82,7 +103,7 @@ const NavMenu = (props) => {
               </a>
             </li>
             <li>
-              <a className="border-b rounded-none pb-4">
+              <a className="border-b pb-4">
                 <GoHistory size="1.25em" className="cursor-pointer me-1" />
                 History <sub className="font-features subs">coming soon</sub>
               </a>
