@@ -1,15 +1,15 @@
-import { Server } from "socket.io";
 import {
   addUser,
-  removeUser,
-  updateUser,
-  getUsersByRoom,
   createRoom,
   getRoomInfo,
-  updateRoom,
-  resetUserVotesByRoom,
+  getUsersByRoom,
   logCollectionValues,
+  removeUser,
+  resetUserVotesByRoom,
+  updateRoom,
+  updateUser,
 } from "@/lib/manageUsers";
+import { Server } from "socket.io";
 
 export default function handler(req, res) {
   if (res.socket.server.io) {

@@ -1,6 +1,5 @@
-import { useSearchParams } from "next/navigation";
-import { NavMenu } from "@/components/navs/navMenu";
 import { Logo } from "@/components/navs/logo";
+import { NavMenu } from "@/components/navs/navMenu";
 
 function RoomNav(props) {
   const { userName, handleUserRename } = props;

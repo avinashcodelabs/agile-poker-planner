@@ -5,13 +5,13 @@ import Card from "@/components/card";
 import { CustomMenu } from "@/components/customMenu";
 import { Deck } from "@/components/deck";
 import { Loading } from "@/components/loading";
+import { RoomNav } from "@/components/navs/roomNav";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useContextMenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import io from "socket.io-client";
-import { RoomNav } from "@/components/navs/roomNav";
 
 let socket;
 

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
 import LogoImage from "../../public/images/logonew.png";
 
 const Logo = () => {

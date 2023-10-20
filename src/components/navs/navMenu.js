@@ -1,20 +1,20 @@
-import React from "react";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { FiGithub } from "react-icons/fi";
+import { useSearchParams } from "next/navigation";
+import React from "react";
+import { CiDark } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
+import { FiGithub } from "react-icons/fi";
+import { GoHistory } from "react-icons/go";
 import {
   LiaExternalLinkAltSolid,
   LiaUserEditSolid,
   LiaUsersCogSolid,
 } from "react-icons/lia";
-import { CiDark } from "react-icons/ci";
-import { GoHistory } from "react-icons/go";
 import { TbHandClick } from "react-icons/tb";
 
-import MenuIcon from "../../public/images/menu.png";
-import { QrCode } from "@/components/qrCode";
 import { InviteLink } from "@/components/inviteLink.js";
+import { QrCode } from "@/components/qrCode";
+import MenuIcon from "../../public/images/menu.png";
 
 const NavMenu = (props) => {
   const { userName, handleUserRename } = props;

@@ -1,7 +1,7 @@
+import { MainNav } from "@/components/navs/mainNav";
 import ParticipantsCard from "@/components/participants";
 import Image from "next/image";
 import BgImage from "../public/images/bgimg.jpg";
-import { MainNav } from "@/components/navs/mainNav";
 
 export default function Home() {
   return (

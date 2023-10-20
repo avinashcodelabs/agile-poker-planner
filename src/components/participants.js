@@ -1,11 +1,10 @@
 "use client";
 
+import { useLocalStorage } from "@uidotdev/usehooks";
 import classNames from "classnames";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { v4 as uuid4 } from "uuid";
-import { useLocalStorage } from "@uidotdev/usehooks";
-import { useSearchParams } from "next/navigation";
 
 export default function ParticipantsCard() {
   const searchParams = useSearchParams();

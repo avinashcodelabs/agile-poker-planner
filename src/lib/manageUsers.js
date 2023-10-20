@@ -95,15 +95,15 @@ const getRoomInfo = (room) => {
 };
 
 export {
-  usersCollection,
-  roomInfoCollection,
   addUser,
-  removeUser,
-  getUsersByRoom,
-  updateUser,
-  resetUserVotesByRoom,
   createRoom,
   getRoomInfo,
-  updateRoom,
+  getUsersByRoom,
   logCollectionValues,
+  removeUser,
+  resetUserVotesByRoom,
+  roomInfoCollection,
+  updateRoom,
+  updateUser,
+  usersCollection,
 };

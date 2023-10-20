@@ -1,5 +1,5 @@
-import { QRCodeSVG } from "qrcode.react";
 import { getInviteRoomLink } from "@/lib/utils";
+import { QRCodeSVG } from "qrcode.react";
 
 const QrCode = ({ room }) => {
   const roomInviteLink = getInviteRoomLink(room);

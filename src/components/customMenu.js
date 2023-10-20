@@ -1,4 +1,4 @@
-import { Menu, Item } from "react-contexify";
+import { Item, Menu } from "react-contexify";
 
 const CustomMenu = ({ menuId, handleOnClick }) => {
   return (

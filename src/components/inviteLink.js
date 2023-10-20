@@ -1,6 +1,5 @@
-import { writeToClipboard } from "@/lib/utils";
+import { getInviteRoomLink, writeToClipboard } from "@/lib/utils";
 import { useState } from "react";
-import { getInviteRoomLink } from "@/lib/utils";
 import { FaRegCopy } from "react-icons/fa";
 
 const InviteLink = ({ room }) => {
