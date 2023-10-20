@@ -64,7 +64,7 @@ const Logo = () => {
         alt="Agile Poker Planner"
         className="m-2"
       />
-      <span className="font-black text-3xl logo hidden md:block">
+      <span className="font-black text-3xl logo hidden sm:block">
         <span>Agile</span>
         <span>{brand}</span>
       </span>
