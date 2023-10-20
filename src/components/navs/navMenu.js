@@ -37,7 +37,7 @@ const NavMenu = (props) => {
   return (
     <div className="flex gap-8 me-3 mt-3">
       <InviteLink room={roomid} />
-      <div className="dropdown dropdown-end  dropdown-open">
+      <div className="dropdown dropdown-end">
         <div tabIndex={0} className="p-3 rounded-lg hover:bg-zinc-100">
           <Image
             src={MenuIcon}

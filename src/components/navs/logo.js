@@ -10,6 +10,7 @@ const Logo = () => {
   const { push } = useRouter();
 
   const handleLogoClick = () => {
+    window.localStorage.setItem("userName", "");
     push(`/`);
   };
 
