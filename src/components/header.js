@@ -3,22 +3,57 @@
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import Logo from "../public/images/logo.png";
+import Logo from "../public/images/logonew.png";
+import { useEffect, useState } from "react";
 import { NavMenu } from "./navMenu";
 import { useLocalStorage } from "@uidotdev/usehooks";
+
+function setCharAt(str, index, chr) {
+  if (index > str.length - 1) return str;
+  return str.substring(0, index) + chr + str.substring(index + 1);
+}
 
 export default function GlobalHeader() {
   const searchParams = useSearchParams();
   const roomId = searchParams.get("roomid");
   const [userName, setUserName] = useLocalStorage("userName", "");
+  const [brand, updateBrand] = useState("♣♦♥♠♣♦♥♠♣♦♥♠♠");
 
   const { push } = useRouter();
-  // const getInitials = (userName) => {
-  //   return userName
-  //     .match(/(\b\S)?/g)
-  //     .join("")
-  //     .toUpperCase();
-  // };
+
+  const animateLogo = async (dir) => {
+    const shape = "♣♦♥♠";
+
+    if (dir === "in") {
+      for (let i = 0; i <= brand.length + 1; i++) {
+        setTimeout(() => {
+          updateBrand((prev) => {
+            return setCharAt(
+              prev,
+              i,
+              shape[Math.floor(Math.random() * shape.length)],
+            );
+          });
+        }, i * 100);
+      }
+    }
+    if (dir === "out") {
+      const brand = "Poker Planner";
+      for (let i = 0; i <= brand.length + 1; i++) {
+        setTimeout(() => {
+          updateBrand((prev) => {
+            return setCharAt(prev, i, brand[i]);
+          });
+        }, i * 100);
+      }
+    }
+  };
+
+  useEffect(() => {
+    animateLogo("out");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleLogoClick = () => {
     push(`/${roomId ? `?roomid=${roomId}` : ""}`);
   };
@@ -32,12 +67,15 @@ export default function GlobalHeader() {
         >
           <Image
             src={Logo}
-            height={50}
-            width={50}
+            height={60}
+            width={60}
             alt="Agile Poker Planner"
             className="m-2"
           />
-          <span className="font-black text-3xl">Agile Poker Planner</span>
+          <span className="font-black text-3xl logo hidden md:block">
+            <span>Agile</span>
+            <span>{brand}</span>
+          </span>
         </div>
         <NavMenu room={roomId} />
 
