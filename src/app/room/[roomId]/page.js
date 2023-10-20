@@ -7,7 +7,7 @@ import { Deck } from "@/components/deck";
 import { Loading } from "@/components/loading";
 import { RoomNav } from "@/components/navs/roomNav";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useContextMenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
@@ -15,15 +15,14 @@ import io from "socket.io-client";
 
 let socket;
 
-export default function Home() {
-  const searchParams = useSearchParams();
-  const room = searchParams.get("roomid");
+export default function Home({ params }) {
+  const room = params.roomId;
   const [userName, setUserName] = useLocalStorage("userName", "");
   if (!room) {
     redirect("/");
   }
   if (room && userName === "") {
-    redirect(`/?roomid=${room}`);
+    redirect(`/{room}`);
   }
 
   const [users, setUsers] = useState([]);
@@ -112,7 +111,11 @@ export default function Home() {
 
   return (
     <>
-      <RoomNav userName={userName} handleUserRename={handleUserRename} />
+      <RoomNav
+        room={room}
+        userName={userName}
+        handleUserRename={handleUserRename}
+      />
       <div
         className="flex flex-col"
         style={{

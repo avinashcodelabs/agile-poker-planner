@@ -4,7 +4,8 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import classNames from "classnames";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { v4 as uuid4 } from "uuid";
+import ShortUniqueId from "short-unique-id";
+const uid = new ShortUniqueId({ length: 5 });
 
 export default function ParticipantsCard() {
   const searchParams = useSearchParams();
@@ -22,7 +23,7 @@ export default function ParticipantsCard() {
       return;
     }
     setUserName(newUserName);
-    push(`/room/?roomid=${roomId ?? uuid4()}`);
+    push(`/room/${roomId ?? uid.rnd()}`);
   };
   return (
     <>

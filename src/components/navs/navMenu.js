@@ -17,12 +17,10 @@ import { QrCode } from "@/components/qrCode";
 import MenuIcon from "../../public/images/menu.png";
 
 const NavMenu = (props) => {
-  const { userName, handleUserRename } = props;
+  const { userName, handleUserRename, room } = props;
   const [isNameRenameAble, setIsNameRenameAble] = React.useState(false);
   const newUseNameRef = React.useState(null);
   const searchParams = useSearchParams();
-
-  const roomid = searchParams.get("roomid");
 
   const makeRenameAble = () => {
     setIsNameRenameAble(true);
@@ -36,7 +34,7 @@ const NavMenu = (props) => {
 
   return (
     <div className="flex gap-8 me-3 mt-3">
-      <InviteLink room={roomid} />
+      <InviteLink room={room} />
       <div className="dropdown dropdown-end">
         <div tabIndex={0} className="p-3 rounded-lg hover:bg-zinc-100">
           <Image
@@ -132,7 +130,7 @@ const NavMenu = (props) => {
               </a>
             </li>
             <li className="flex flex-col gap-2 self-center">
-              <QrCode room={roomid} />
+              <QrCode room={room} />
               <span>Scan QR to join room</span>
             </li>
           </ul>
