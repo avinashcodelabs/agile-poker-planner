@@ -73,7 +73,8 @@ export default function Home() {
     });
   };
 
-  const handleStartNewVote = () => {
+  const handleStartNewVote = (e) => {
+    e.preventDefault();
     socket.emit("room-info-update", {
       room,
       revealState: "close",
@@ -127,7 +128,10 @@ export default function Home() {
           <div className="flex flex-row justify-between p-2">
             <div className="flex-1">
               {currentUserId === roomInfo.roomAdmin && (
-                <div className="flex flex-col lg:flex-row gap-2 items-center self-start">
+                <form
+                  onSubmit={handleStartNewVote}
+                  className="flex flex-col lg:flex-row gap-2 items-center self-start"
+                >
                   <div className="self-start gap-2 w-full lg:w-96 flex items-center px-1 py-2">
                     <input
                       id="story-title-input-field"
@@ -141,7 +145,7 @@ export default function Home() {
                   <div className="flex self-start gap-2">
                     <div className="cursor-pointer label">
                       <button
-                        onClick={handleStartNewVote}
+                        type="submit"
                         className="btn btn-primary text-base-100 normal-case rounded-lg font-medium"
                       >
                         Start New Voting
@@ -159,7 +163,7 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                </div>
+                </form>
               )}
               {roomInfo.userStory.title ? (
                 <div className="flex gap-2 items-center self-start pt-2 p-2">
@@ -193,19 +197,6 @@ export default function Home() {
           </div>
           <div className="voting-floater rounded-2xl p-3 bottom-1 drop-shadow-md bg-primary bg-opacity-10">
             <div className="container mx-auto flex flex-col gap-5 justify-center items-center">
-              {/* {isAdmin && (
-            <div className="flex gap-2 items-center self-start lg:absolute">
-              <input
-                className="checkbox checkbox-success rounded-lg"
-                type="checkbox"
-                placeholder="Enter story title"
-              />
-              <label className="font-bold font-neutral">
-                Vote as participant
-              </label>
-            </div>
-          )} */}
-
               {roomInfo.revealState === "open" ? (
                 <Agreement users={users} />
               ) : (
