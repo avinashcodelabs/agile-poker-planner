@@ -20,11 +20,11 @@ const addUser = ({ id, userName, room }) => {
   return usersCollection[id];
 };
 
-const updateUser = ({ id, vote }) => {
+const updateUser = ({ id, data }) => {
   if (!usersCollection[id]) {
     return null;
   }
-  usersCollection[id].vote = vote;
+  usersCollection[id] = { ...usersCollection[id], id, ...data };
   return usersCollection[id];
 };
 

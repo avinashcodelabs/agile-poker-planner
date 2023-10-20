@@ -29,7 +29,7 @@ export default function Home() {
   const [users, setUsers] = useState([]);
   const [roomInfo, setRoomInfo] = useState({});
   const [newStoryTitle, setNewStoryTitle] = useState("");
-  const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const userTileMenuId = "userTileMenuId";
   const { show } = useContextMenu({
     id: userTileMenuId,
@@ -49,7 +49,10 @@ export default function Home() {
       path: "/api/socket_io",
     });
     socket.on("connect", () => {
-      setCurrentUserId(socket.id);
+      setCurrentUserInfo({
+        userId: socket.id,
+        userName: userName,
+      });
       // todo : remove console logs for seo
       console.log("client - connected", socket.id);
     });
@@ -62,12 +65,8 @@ export default function Home() {
     });
   };
 
-  if (!users.length) {
-    return <Loading />;
-  }
-
   const handleVote = (vote) => {
-    socket.emit("user-vote", { room, userName, vote });
+    socket.emit("user-update", { vote });
   };
 
   const toggleRevealState = () => {
@@ -102,14 +101,29 @@ export default function Home() {
   };
 
   const handleUserTileClick = (userId, event) => {
-    if (roomInfo.roomAdmin !== userId && roomInfo.roomAdmin === currentUserId) {
+    if (
+      roomInfo.roomAdmin !== userId &&
+      roomInfo.roomAdmin === currentUserInfo.userId
+    ) {
       show({ event, props: { userId } });
     }
   };
 
+  const handleUserRename = (newName) => {
+    setUserName(newName);
+    socket.emit("user-update", { userName: newName });
+  };
+
+  if (!users.length) {
+    return <Loading />;
+  }
+
   return (
     <>
-      <RoomNav />
+      <RoomNav
+        currentUserInfo={currentUserInfo}
+        handleUserRename={handleUserRename}
+      />
       <div
         className="flex flex-col"
         style={{
@@ -124,7 +138,7 @@ export default function Home() {
         >
           <div className="flex flex-row justify-between p-2">
             <div className="flex-1">
-              {currentUserId === roomInfo.roomAdmin && (
+              {currentUserInfo.userId === roomInfo.roomAdmin && (
                 <div className="flex flex-col lg:flex-row gap-2 items-center self-start">
                   <div className="self-start gap-2 w-full lg:w-96 flex items-center px-1 py-2">
                     <input

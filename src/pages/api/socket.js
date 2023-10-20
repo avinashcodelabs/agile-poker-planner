@@ -42,8 +42,8 @@ export default function handler(req, res) {
         });
       });
 
-      socket.on("user-vote", (data) => {
-        const user = updateUser({ id: socket.id, vote: data.vote });
+      socket.on("user-update", (data) => {
+        const user = updateUser({ id: socket.id, data });
 
         if (user) {
           io.to(user.room).emit("room-users", {

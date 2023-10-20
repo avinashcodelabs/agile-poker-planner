@@ -13,21 +13,21 @@ import MenuIcon from "../../public/images/menu.png";
 import { QrCode } from "@/components/qrCode";
 import { InviteLink } from "@/components/inviteLink.js";
 
-const NavMenu = ({ room }) => {
+const NavMenu = (props) => {
+  const { currentUserInfo, handleUserRename } = props;
   const [isNameRenameAble, setIsNameRenameAble] = React.useState(false);
   const newUseNameRef = React.useState(null);
-
   const searchParams = useSearchParams();
-  const roomid = searchParams.get("roomid") || room;
 
-  const handleUserRename = () => {
+  const roomid = searchParams.get("roomid");
+
+  const makeRenameAble = () => {
     setIsNameRenameAble(true);
     // newUseNameRef.current.focus();
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newUseNameRef.current.value);
-    // Update the name to card here
+    handleUserRename(newUseNameRef.current.value);
     setIsNameRenameAble(false);
   };
 
@@ -49,7 +49,7 @@ const NavMenu = ({ room }) => {
         >
           <ul className="menu w-56 gap-3">
             <li
-              onClick={handleUserRename}
+              onClick={makeRenameAble}
               className="hover:bg-inherit focus:bg-inherit"
             >
               {isNameRenameAble ? (
@@ -59,6 +59,7 @@ const NavMenu = ({ room }) => {
                     type="text"
                     className="input input-bordered input-sm join-item w-full max-w-xs"
                     placeholder="new name"
+                    defaultValue={currentUserInfo.userName}
                   />
                   <button
                     type="submit"
@@ -70,7 +71,7 @@ const NavMenu = ({ room }) => {
               ) : (
                 <a className="border-b rounded-none pb-4">
                   <FaUserEdit size="1.25em" className="cursor-pointer me-1" />
-                  <span>Rename</span>
+                  <span>Rename - {currentUserInfo.userName}</span>
                 </a>
               )}
             </li>
