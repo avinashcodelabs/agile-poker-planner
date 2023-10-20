@@ -9,9 +9,9 @@ import { CiDark } from "react-icons/ci";
 import { GoHistory } from "react-icons/go";
 import { TbHandClick } from "react-icons/tb";
 
-import MenuIcon from "../public/images/menu.png";
-import { QrCode } from "./qrCode";
-import { InviteLink } from "./inviteLink.js";
+import MenuIcon from "../../public/images/menu.png";
+import { QrCode } from "@/components/qrCode";
+import { InviteLink } from "@/components/inviteLink.js";
 
 const NavMenu = ({ room }) => {
   const [isNameRenameAble, setIsNameRenameAble] = React.useState(false);
