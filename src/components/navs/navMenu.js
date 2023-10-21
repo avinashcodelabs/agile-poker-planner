@@ -1,39 +1,40 @@
-import React from "react";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { FaUserEdit } from "react-icons/fa";
-import { FiGithub } from "react-icons/fi";
-import { FaXTwitter } from "react-icons/fa6";
-import { LiaExternalLinkAltSolid } from "react-icons/lia";
+import { useSearchParams } from "next/navigation";
+import React from "react";
 import { CiDark } from "react-icons/ci";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiGithub } from "react-icons/fi";
 import { GoHistory } from "react-icons/go";
+import {
+  LiaExternalLinkAltSolid,
+  LiaUserEditSolid,
+  LiaUsersCogSolid,
+} from "react-icons/lia";
 import { TbHandClick } from "react-icons/tb";
 
-import MenuIcon from "../public/images/menu.png";
-import { QrCode } from "./qrCode";
-import { InviteLink } from "./inviteLink.js";
+import { InviteLink } from "@/components/inviteLink.js";
+import { QrCode } from "@/components/qrCode";
+import MenuIcon from "../../public/images/menu.png";
 
-const NavMenu = ({ room }) => {
+const NavMenu = (props) => {
+  const { userName, handleUserRename, room } = props;
   const [isNameRenameAble, setIsNameRenameAble] = React.useState(false);
   const newUseNameRef = React.useState(null);
-
   const searchParams = useSearchParams();
-  const roomid = searchParams.get("roomid") || room;
 
-  const handleUserRename = () => {
+  const makeRenameAble = () => {
     setIsNameRenameAble(true);
     // newUseNameRef.current.focus();
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newUseNameRef.current.value);
-    // Update the name to card here
+    handleUserRename(newUseNameRef.current.value);
     setIsNameRenameAble(false);
   };
 
   return (
     <div className="flex gap-8 me-3 mt-3">
-      <InviteLink room={roomid} />
+      <InviteLink room={room} />
       <div className="dropdown dropdown-end">
         <div tabIndex={0} className="p-3 rounded-lg hover:bg-zinc-100">
           <Image
@@ -49,7 +50,7 @@ const NavMenu = ({ room }) => {
         >
           <ul className="menu w-56 gap-3">
             <li
-              onClick={handleUserRename}
+              onClick={makeRenameAble}
               className="hover:bg-inherit focus:bg-inherit"
             >
               {isNameRenameAble ? (
@@ -59,6 +60,7 @@ const NavMenu = ({ room }) => {
                     type="text"
                     className="input input-bordered input-sm join-item w-full max-w-xs"
                     placeholder="new name"
+                    defaultValue={userName}
                   />
                   <button
                     type="submit"
@@ -68,11 +70,29 @@ const NavMenu = ({ room }) => {
                   </button>
                 </form>
               ) : (
-                <a className="border-b rounded-none pb-4">
-                  <FaUserEdit size="1.25em" className="cursor-pointer me-1" />
-                  <span>Rename</span>
+                <a className="">
+                  <LiaUserEditSolid
+                    size="1.4em"
+                    className="cursor-pointer me-1"
+                  />
+                  <div>
+                    Change name :
+                    <span className="font-bold ms-1">{userName}</span>
+                  </div>
                 </a>
               )}
+            </li>
+            <li className="hover:bg-inherit focus:bg-inherit">
+              <a
+                className="border-b pb-4 tooltip tooltip-left flex"
+                data-tip="Click on any user's card/tile and pick 'Set as host'"
+              >
+                <LiaUsersCogSolid
+                  size="1.4em"
+                  className="cursor-pointer me-1"
+                />
+                <span>Set others as host</span>
+              </a>
             </li>
             <li>
               <a>
@@ -81,7 +101,7 @@ const NavMenu = ({ room }) => {
               </a>
             </li>
             <li>
-              <a className="border-b rounded-none pb-4">
+              <a className="border-b pb-4">
                 <GoHistory size="1.25em" className="cursor-pointer me-1" />
                 History <sub className="font-features subs">coming soon</sub>
               </a>
@@ -110,7 +130,7 @@ const NavMenu = ({ room }) => {
               </a>
             </li>
             <li className="flex flex-col gap-2 self-center">
-              <QrCode room={roomid} />
+              <QrCode room={room} />
               <span>Scan QR to join room</span>
             </li>
           </ul>

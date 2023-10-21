@@ -1,9 +1,9 @@
-import { Menu, Item } from "react-contexify";
+import { Item, Menu } from "react-contexify";
 
 const CustomMenu = ({ menuId, handleOnClick }) => {
   return (
     <Menu id={menuId}>
-      <Item onClick={handleOnClick}>Make Host</Item>
+      <Item onClick={handleOnClick}>Set as host</Item>
     </Menu>
   );
 };

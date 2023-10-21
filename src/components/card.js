@@ -1,9 +1,9 @@
 "use client";
 
+import getRandomColor from "@/lib/getRandomColor";
 import classNames from "classnames";
 import Image from "next/image";
 import Verified from "../public/images/verified.gif";
-import getRandomColor from "@/lib/getRandomColor";
 
 export default function Card(props) {
   const { onClick, onContextMenu, reveal, userName, vote, index, isAdmin } =
@@ -33,7 +33,10 @@ export default function Card(props) {
               ></div>
             </div>
             <div className="text-neutral-focus font-semibold text-center text-ellipsis overflow-x-clip overflow-y-hidden h-6 w-32">
-              {userName} {isAdmin ? <span>(host)</span> : null}
+              {userName}
+              {isAdmin ? (
+                <span className="text-gray-500 ms-1">(host)</span>
+              ) : null}
             </div>
             {vote ? (
               <div className="w-6 h-6">

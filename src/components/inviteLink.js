@@ -1,6 +1,5 @@
-import { writeToClipboard } from "@/lib/utils";
+import { getInviteRoomLink, writeToClipboard } from "@/lib/utils";
 import { useState } from "react";
-import { getInviteRoomLink } from "@/lib/utils";
 import { FaRegCopy } from "react-icons/fa";
 
 const InviteLink = ({ room }) => {
@@ -19,7 +18,7 @@ const InviteLink = ({ room }) => {
       onClick={copyUrlToClipboard}
     >
       <FaRegCopy size="1.3em" />
-      <span className="font-semibold">Invite others</span>
+      <span className="font-semibold hidden sm:block">Invite others</span>
       {showToast ? (
         <div className="toast toast-end">
           <div className="alert alert-success">

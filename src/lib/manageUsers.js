@@ -20,11 +20,11 @@ const addUser = ({ id, userName, room }) => {
   return usersCollection[id];
 };
 
-const updateUser = ({ id, vote }) => {
+const updateUser = ({ id, data }) => {
   if (!usersCollection[id]) {
     return null;
   }
-  usersCollection[id].vote = vote;
+  usersCollection[id] = { ...usersCollection[id], id, ...data };
   return usersCollection[id];
 };
 
@@ -95,15 +95,15 @@ const getRoomInfo = (room) => {
 };
 
 export {
-  usersCollection,
-  roomInfoCollection,
   addUser,
-  removeUser,
-  getUsersByRoom,
-  updateUser,
-  resetUserVotesByRoom,
   createRoom,
   getRoomInfo,
-  updateRoom,
+  getUsersByRoom,
   logCollectionValues,
+  removeUser,
+  resetUserVotesByRoom,
+  roomInfoCollection,
+  updateRoom,
+  updateUser,
+  usersCollection,
 };

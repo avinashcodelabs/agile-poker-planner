@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 let vote;
 const Deck = ({ onVote, users, userName }) => {
-  vote = users.find((user) => user.userName === userName).vote;
+  vote = users.find((user) => user.userName === userName)?.vote;
 
   const fibonacciNumbers = generateFibonacciSeries();
   return (

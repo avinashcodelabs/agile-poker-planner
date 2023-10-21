@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&display=swap'); */
-
-/* *{ font-family: 'Gabarito', cursive; } */
-
 .card-container {
   perspective: 500px;
   position: relative;
@@ -37,4 +33,28 @@
   width: 100%;
   transform: translateX(-50%);
   left: 50%;
+}
+
+.logo {
+  position: relative;
+  margin-top: 10px;
+}
+
+.logo > span:nth-child(1) {
+  font-size: 1rem;
+  position: absolute;
+  top: -18px;
+  left: 0px;
+  color: #40ad65;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration:wavy;
+  letter-spacing: 1.8rem;
+}
+
+.logo > span:nth-child(2) {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  font-weight: bolder;
+
 }
