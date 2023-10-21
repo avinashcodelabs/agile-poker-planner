@@ -50,13 +50,12 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-    images: [`${siteConfig.url}/og.jpeg`],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpeg`],
+    images: [`${siteConfig.url}/opengraph-image.jpg`],
     creator: "@agilepokerplan",
   },
   icons: {
