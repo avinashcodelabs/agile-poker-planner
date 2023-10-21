@@ -18,7 +18,7 @@ const generateFibonacciSeries = (upto = 21) => {
 // should we copy the room link or landing page link
 // both will work but user will be redirected based on this value
 const getInviteRoomLink = (room) => {
-  return `${window.location.host}/room?roomid=${room}`;
+  return `${window.location.host}/room/${room}`;
 };
 
 const writeToClipboard = async (content) => {

@@ -3,7 +3,7 @@ import ParticipantsCard from "@/components/participants";
 import Image from "next/image";
 import BgImage from "../public/images/bgimg.jpg";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <>
       <MainNav />
