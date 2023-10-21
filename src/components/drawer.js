@@ -1,5 +1,5 @@
 import Image from "next/image";
-import MenuIcon from "../public/images/menu.png";
+import MenuIcon from "../../public/images/menu.png";
 import { InviteColleague } from "./inviteColleague";
 
 export const Drawer = ({ room }) => {

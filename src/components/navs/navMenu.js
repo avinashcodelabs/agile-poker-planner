@@ -14,7 +14,7 @@ import { TbHandClick } from "react-icons/tb";
 
 import { InviteLink } from "@/components/inviteLink.js";
 import { QrCode } from "@/components/qrCode";
-import MenuIcon from "../../public/images/menu.png";
+import MenuIcon from "../../../public/images/menu.png";
 
 const NavMenu = (props) => {
   const { userName, handleUserRename, room } = props;
