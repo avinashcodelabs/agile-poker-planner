@@ -9,12 +9,12 @@ const roboto = Roboto({
 });
 
 export const metadata = {
+  metadataBase: `${siteConfig.url}`,
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  category: "technology",
   keywords: [
     "Agile",
     "Planning",
