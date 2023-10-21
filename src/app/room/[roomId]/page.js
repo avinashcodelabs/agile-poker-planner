@@ -15,14 +15,14 @@ import io from "socket.io-client";
 
 let socket;
 
-export default function Home({ params }) {
+export default function RoomPage({ params }) {
   const room = params.roomId;
   const [userName, setUserName] = useLocalStorage("userName", "");
   if (!room) {
     redirect("/");
   }
   if (room && userName === "") {
-    redirect(`/{room}`);
+    redirect(`/?roomid=${room}`);
   }
 
   const [users, setUsers] = useState([]);
