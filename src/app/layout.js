@@ -14,6 +14,12 @@ export const metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  category: "technology",
   keywords: [
     "Agile",
     "Planning",
@@ -49,6 +55,7 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [`${siteConfig.url}/og.jpeg`],
   },
   twitter: {
     card: "summary_large_image",
@@ -62,7 +69,7 @@ export const metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+  manifest: `${siteConfig.url}/manifest.json`,
 };
 
 export default function RootLayout({ children }) {

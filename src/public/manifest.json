@@ -1,6 +1,7 @@
 {
   "name": "Agile Poker Planner",
   "short_name": "Agile Poker Planner",
+  "start_url": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
