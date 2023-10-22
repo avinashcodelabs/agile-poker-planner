@@ -55,11 +55,7 @@ export const metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [
-      {
-        ima,
-      },
-    ],
+    images: [`${siteConfig.url}/opengraph-image.jpg`],
     creator: "@agilepokerplan",
   },
   icons: {
