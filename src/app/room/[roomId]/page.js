@@ -4,6 +4,7 @@ import Agreement from "@/components/agreement";
 import Card from "@/components/card";
 import { CustomMenu } from "@/components/customMenu";
 import { Deck } from "@/components/deck";
+import { Firework } from "@/components/firework";
 import { Loading } from "@/components/loading";
 import { RoomNav } from "@/components/navs/roomNav";
 import { useLocalStorage } from "@uidotdev/usehooks";
@@ -111,6 +112,9 @@ export default function RoomPage({ params }) {
 
   return (
     <>
+      {roomInfo.revealState === "open" ? (
+        <Firework revealState={roomInfo.revealState} />
+      ) : null}
       <RoomNav
         room={room}
         userName={userName}
@@ -154,7 +158,10 @@ export default function RoomPage({ params }) {
                         Start New Voting
                       </button>
                     </div>
-                    <div className="cursor-pointer label">
+                    <div
+                      className="cursor-pointer label"
+                      onClick={toggleRevealState}
+                    >
                       <span className="label-text font-semibold px-2 text-lg">
                         Reveal Votes
                       </span>
