@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fireworks-js/react": "^2.10.7",
     "@uidotdev/usehooks": "^2.2.0",
     "autoprefixer": "10.4.15",
     "bufferutil": "^4.0.7",

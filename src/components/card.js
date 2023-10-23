@@ -3,7 +3,7 @@
 import getRandomColor from "@/lib/getRandomColor";
 import classNames from "classnames";
 import Image from "next/image";
-import Verified from "../public/images/verified.gif";
+import Verified from "../../public/images/verified.gif";
 
 export default function Card(props) {
   const { onClick, onContextMenu, reveal, userName, vote, index, isAdmin } =
