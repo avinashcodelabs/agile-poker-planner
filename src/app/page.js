@@ -11,6 +11,7 @@ export default function LandingPage() {
         className="flex flex-col"
         style={{
           backgroundImage: `url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')`,
+          height: "calc(100vh - 86px)",
         }}
       >
         <main className="mx-8">

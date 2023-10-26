@@ -1,3 +1,5 @@
+import VotingChart from "./votingChart";
+
 const calculateAgreement = (users) => {
   const counts = {};
   let max = 0;
@@ -17,29 +19,28 @@ const calculateAgreement = (users) => {
 
 const getPercent = (val, total) => (val * 100) / total;
 
+const getAverage = (counts, totalVotes) =>
+  Object.keys(counts).reduce((acc, curr) => parseInt(acc) + parseInt(curr), 0) /
+  totalVotes;
+
 const Agreement = ({ users }) => {
   const { counts, totalVotes } = calculateAgreement(users);
 
   return (
-    <div className="flex flex-col gap-2 pb-2 flex-wrap">
-      <label className="font-bold text-lg text-center">Agreement</label>
-      {Object.entries(counts).map(([key, val], index) => (
-        <div
-          className="flex gap-0.5 items-center flex-col  w-64 md:w-96"
-          key={index}
-        >
-          <span className="flex justify-between  w-64 md:w-96">
-            <span className="font-bold">{key}</span>
-            <span>{`${getPercent(val, totalVotes)}%`}</span>
-          </span>
-          <progress
-            className="progress progress-primary"
-            value={getPercent(val, totalVotes)}
-            max={100}
-          ></progress>
-          <span className=" self-start">{`${val} vote(s)`}</span>
-        </div>
-      ))}
+    <div className="flex flex-row gap-4 flex-wrap justify-center w-full">
+      <div className="flex justify-center items-center flex-col">
+        <p>Average</p>
+        <p className="font-bold text-4xl">
+          {parseFloat(getAverage(counts, totalVotes)).toFixed(2)}
+        </p>
+      </div>
+
+      <VotingChart
+        data={Object.entries(counts).map(([key, val]) => ({
+          point: key,
+          count: val,
+        }))}
+      />
     </div>
   );
 };

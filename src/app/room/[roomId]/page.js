@@ -124,6 +124,7 @@ export default function RoomPage({ params }) {
         className="flex flex-col"
         style={{
           backgroundImage: `url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')`,
+          height: "calc(100vh - 86px)",
         }}
       >
         <main
@@ -205,7 +206,7 @@ export default function RoomPage({ params }) {
               </div>
             </div>
           </div>
-          <div className="voting-floater rounded-2xl p-3 bottom-1 drop-shadow-md bg-primary bg-opacity-10">
+          <div className="voting-floater rounded-tl-2xl rounded-tr-2xl p-3 bottom-1 drop-shadow-md bg-primary bg-opacity-10">
             <div className="container mx-auto flex flex-col gap-5 justify-center items-center">
               {roomInfo.revealState === "open" ? (
                 <Agreement users={users} />
