@@ -17,29 +17,54 @@ const calculateAgreement = (users) => {
 
 const getPercent = (val, total) => (val * 100) / total;
 
+const getAverage = (counts, totalVotes) => {
+  // const  totalVotes = Object.values(totalVotes).reduce((a, b) => a + b, 0)
+  const avg =
+    Object.entries(counts).reduce((acc, curr) => {
+      let temp = parseInt(curr[0]) * parseInt(curr[1]);
+      return parseInt(temp + acc);
+    }, 0) / totalVotes;
+  return avg;
+};
+
 const Agreement = ({ users }) => {
   const { counts, totalVotes } = calculateAgreement(users);
+  const commonPointVoted = Math.max(...Object.values(counts));
 
   return (
-    <div className="flex flex-col gap-2 pb-2 flex-wrap">
-      <label className="font-bold text-lg text-center">Agreement</label>
-      {Object.entries(counts).map(([key, val], index) => (
-        <div
-          className="flex gap-0.5 items-center flex-col  w-64 md:w-96"
-          key={index}
-        >
-          <span className="flex justify-between  w-64 md:w-96">
-            <span className="font-bold">{key}</span>
-            <span>{`${getPercent(val, totalVotes)}%`}</span>
+    <div className="flex gap-10 w-full items-center justify-center">
+      <div className="flex justify-center">
+        <p>
+          <span className="text-lg">Average:</span>
+          <span className="text-gray-600 ms-1 font-bold text-xl">
+            {parseFloat(getAverage(counts, totalVotes)).toFixed(2)}
           </span>
-          <progress
-            className="progress progress-primary"
-            value={getPercent(val, totalVotes)}
-            max={100}
-          ></progress>
-          <span className=" self-start">{`${val} vote(s)`}</span>
-        </div>
-      ))}
+        </p>
+      </div>
+      <div className="flex gap-8">
+        {Object.entries(counts).map((value, idx) => (
+          <div key={idx} className="flex flex-col items-center gap-1">
+            <div
+              className={`flex h-16 w-10 items-center justify-center rounded-xl bg-gray-100 shadow-md ${
+                value[1] == commonPointVoted ? " shadow-green-700" : ""
+              }`}
+            >
+              <span className="font-bold">{value[0]}</span>
+            </div>
+            <div>
+              {value[1]}
+              <span className="ms-1">{value[1] == 1 ? "Vote" : "Votes"}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* <VotingChart
+        data={Object.entries(counts).map(([key, val]) => ({
+          point: key,
+          count: val,
+        }))}
+      /> */}
     </div>
   );
 };

@@ -33,7 +33,7 @@ const NavMenu = (props) => {
   };
 
   return (
-    <div className="flex gap-8 me-3 mt-3">
+    <div className="flex gap-4 me-3 mt-3">
       <InviteLink room={room} />
       <div className="dropdown dropdown-end">
         <div tabIndex={0} className="p-3 rounded-lg hover:bg-zinc-100">
