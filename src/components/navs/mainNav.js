@@ -9,20 +9,20 @@ function MainNav() {
         <Logo />
         <div className="flex gap-8 me-6 items-center">
           <a
-            className="hover:bg-gray-400 bg-gray-200 rounded-full p-3"
+            className="hover:bg-gray-400 bg-gray-200 rounded-full p-1 md:p-2"
             href="https://github.com/avinashcodelabs/agile-poker-planner"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FiGithub size="1.5em" className="cursor-pointer " />
+            <FiGithub className="cursor-pointer LandingPageIcon" />
           </a>
           <a
-            className="hover:bg-gray-400 bg-gray-200 rounded-full p-3"
+            className="hover:bg-gray-400 bg-gray-200 rounded-full p-1 md:p-2"
             href="https://twitter.com/agilepokerplan"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaXTwitter size="1.5em" className="cursor-pointer" />
+            <FaXTwitter className="cursor-pointer LandingPageIcon" />
           </a>
         </div>
       </div>
