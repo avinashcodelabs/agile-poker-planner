@@ -30,9 +30,8 @@
 .voting-floater {
   position: fixed;
   bottom: 0px;
-  width: 100%;
-  transform: translateX(-50%);
-  left: 50%;
+  width: calc(100% - 40px);
+  left: 20px;
 }
 
 .logo {
