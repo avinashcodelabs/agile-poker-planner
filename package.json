@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fireworks-js/react": "^2.10.7",
     "@uidotdev/usehooks": "^2.2.0",
     "autoprefixer": "10.4.15",
     "bufferutil": "^4.0.7",
@@ -25,6 +26,7 @@
     "react-contexify": "^6.0.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
+    "recharts": "^2.9.0",
     "sharp": "^0.32.6",
     "short-unique-id": "^5.0.3",
     "socket.io": "^4.7.2",

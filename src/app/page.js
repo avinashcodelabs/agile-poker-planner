@@ -1,7 +1,7 @@
 import { MainNav } from "@/components/navs/mainNav";
 import ParticipantsCard from "@/components/participants";
 import Image from "next/image";
-import BgImage from "../public/images/bgimg.jpg";
+import BgImage from "../../public/images/bgimg.jpg";
 
 export default function LandingPage() {
   return (
@@ -11,6 +11,7 @@ export default function LandingPage() {
         className="flex flex-col"
         style={{
           backgroundImage: `url('https://www.toptal.com/designers/subtlepatterns/uploads/double-bubble-outline.png')`,
+          height: "calc(100vh - 86px)",
         }}
       >
         <main className="mx-8">

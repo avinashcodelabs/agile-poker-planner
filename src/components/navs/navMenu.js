@@ -14,7 +14,7 @@ import { TbHandClick } from "react-icons/tb";
 
 import { InviteLink } from "@/components/inviteLink.js";
 import { QrCode } from "@/components/qrCode";
-import MenuIcon from "../../public/images/menu.png";
+import MenuIcon from "../../../public/images/menu.png";
 
 const NavMenu = (props) => {
   const { userName, handleUserRename, room } = props;
@@ -33,7 +33,7 @@ const NavMenu = (props) => {
   };
 
   return (
-    <div className="flex gap-8 me-3 mt-3">
+    <div className="flex gap-4 me-3 mt-3">
       <InviteLink room={room} />
       <div className="dropdown dropdown-end">
         <div tabIndex={0} className="p-3 rounded-lg hover:bg-zinc-100">
