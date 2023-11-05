@@ -206,7 +206,11 @@ export default function RoomPage({ params }) {
               </div>
             </div>
           </div>
-          <div className="voting-floater rounded-tl-2xl rounded-tr-2xl p-3 bottom-1 drop-shadow-md bg-primary bg-opacity-10">
+          <div
+            className="voting-floater rounded-tl-2xl rounded-tr-2xl
+           p-3 bottom-1 drop-shadow-lg bg-white shadow-2xl md:shadow-none
+           shadow-teal-200 md:drop-shadow-md md:bg-primary md:bg-opacity-10"
+          >
             <div className="container mx-auto flex flex-col gap-5 justify-center items-center">
               {roomInfo.revealState === "open" ? (
                 <Agreement users={users} />
