@@ -1,5 +1,6 @@
 import { generateFibonacciSeries } from "@/lib/utils";
 import classNames from "classnames";
+import useSound from "use-sound";
 
 let vote;
 const Deck = ({ onVote, users, userName }) => {
@@ -16,10 +17,13 @@ const Deck = ({ onVote, users, userName }) => {
 };
 
 const VoteCard = ({ number, onVote }) => {
+  const [play] = useSound("/mausklick.mp3");
+
   const buttonJsx = (
     <button
       onClick={(e) => {
         onVote(number);
+        play();
       }}
       className={classNames("btn btn-md md:btn-lg btn-primary text-base-100", {
         "btn-primary btn-outline bg-base-100": vote !== number,
